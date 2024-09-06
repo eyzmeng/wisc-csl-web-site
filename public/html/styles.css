@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+html {
+  color-scheme: light dark;
+  font-size: 12pt;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Open Sans", "SF Sans", Helvetica, Ariel, sans-serif;
+  margin: 15% auto;
+  padding: 0 1.5rem;
+  min-height: 100vh;
+  max-width: 100ch;
+}
+
+details > ul {
+  margin: 1.5rem auto;
+  max-width: 70ch;
+}
