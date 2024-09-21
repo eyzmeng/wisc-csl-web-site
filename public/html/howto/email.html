@@ -73,8 +73,12 @@
   them. :/</p>
   <h2 id="addr-spec">Lesson 0: Email addresses. [<a href="#addr-spec">link</a>]</h2>
   <p>Just to make sure we are on the same page: an email address
-  has two parts: the name (RFC 5322 local-part) and the domain name
-  (RFC 5322 domain-part).  In the address “ethan&commat;rapidcow.org”,
+  has two parts: the name and the domain name.  (In
+  <a href="https://datatracker.ietf.org/doc/html/rfc5322#section-3.4.1"
+  >RFC 5322 Section 3.4.1</a>, the most recent revision of the
+  specification of the Internet Message Format, the two parts
+  are called local-part and domain respectively.)
+  For example, in the address “ethan&commat;rapidcow.org”,
   “ethan” is the name, and “rapidcow.org” is the domain name.
   I think you all know that, but just to be clear on the terminology.</p>
   <p><em>Aside</em>: the domain can sometimes be useful in telling
@@ -98,9 +102,9 @@
   go the other way around though — that is, if you see the domain
   wisc.edu.rapidcow.org, it’s actually the subdomain “wisc.edu”
   under my domain “rapidcow.org”, <em>not</em> wisc.edu’s subdomain.
-  (This can be confusing, but… it has always this way since, I guess,
-  the creation of DNS?  Domains go way back before websites; maybe
-  they had a good reason to subdivide stuff in reverse.)</p>
+  (This can be confusing, but… it has always been this way since,
+  I guess, the creation of DNS?  Domains go way back before websites;
+  maybe they had a good reason to subdivide stuff in reverse.)</p>
   <p><em>Aside 2.5</em> (please skip this; this is just pure
   rant after I researched about domain names):
   For the gritty details, a subdomain is
