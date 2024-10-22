@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- This is an RSS feed for CS300 pardners :)          -->
+<!-- It is completely hand-typed, and includes comments -->
+<!-- like these that aim to be educational.             -->
+
+<!-- First, namespace declarations.        -->
+<!-- The atom namespace is for atom:link.  -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel><!-- Every RSS has a single channel. -->
+    <!-- Every channel is required to have a title, -->
+    <!-- a link, and a description. -->
+    <title>Ethan’s Partner Feed</title>
+    <link>https://pages.cs.wisc.edu/~emeng/cs300/pair.html</link>
+    <description>Feed for updates about my CS300
+    pair programming partner search</description>
+    <!-- Documentation for RSS. -->
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <!-- lastBuildDate is not only relevant in the context of  -->
+    <!-- generated RSS; it appears to be the last changed date -->
+    <!-- simply, regardless of who it is changing it.          -->
+    <!-- NOTE: with GNU date command, run !date ~~rfc~email    -->
+    <lastBuildDate>Tue, 22 Oct 2024 13:37:03 -0500</lastBuildDate>
+    <language>en-US</language>
+    <!-- These are the email (name)s of people writing the     -->
+    <!-- content and managing the channel. I'll just say that  -->
+    <!-- I am both. ;) -->
+    <managingEditor>emeng@cs.wisc.edu (Ethan Meng)</managingEditor>
+    <webMaster>emeng@cs.wisc.edu (Ethan Meng)</webMaster>
+    <!-- Lastly, we need to link to ourselves...? -->
+    <!-- W3.ORG what does this mean...            -->
+    <!-- https://validator.w3.org/feed/docs/warning/MissingAtomSelfLink.html -->
+    <!-- Also, the UW webserver seems to serve this as application/x-rss+xml -->
+    <!-- so we'll just use XML to play it on the safe side. -->
+    <!-- https://validator.w3.org/feed/docs/warning/UnexpectedContentType.html -->
+    <atom:link rel="self" type="application/rss+xml"
+      href="https://pages.cs.wisc.edu/~emeng/cs300/pair.xml" />
+
+    <!-- Now let's get to the real part. -->
+    <item>
+      <title>Hello people of CS300!</title>
+      <author>emeng@cs.wisc.edu (Ethan Meng)</author>
+      <pubDate>Tue, 22 Oct 2024 12:40:47 -0500</pubDate>
+      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair.rss.html#1729618847</link>
+      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair.rss.html#1729618847</guid>
+      <description><![CDATA[
+        <P>Welcome! Thank you for tuning into my channel I set up in a rush.
+        I am making a partner search page, which is probably what led you to
+        this feed.  In that case --- hi!  Please subscribe to this feed
+        because this is where I make more frequent updates, not Piazza
+        (that's where I either put on a YES/NO for the search).  Stuff
+        you can expect to get from subscribing to this feed includes:</P>
+
+        <UL>
+          <LI>How many people have emailed me, and
+          generally speaking how many I am considering...</LI>
+          <LI>Updates to the search page itself, such as new
+          expectations...</LI>
+          <LI>My schedule, such as the precise time I am
+          free, special circumstances, or notices...</LI>
+        </UL>
+
+        <P>This is not a substitute for email communication: those are
+        for more private things and the actual partnership itself.
+        However I thought that it would help to, well, just know if a
+        person is still available before you email them
+        (one of the questions that get asked too often in the
+        tiny space on Piazza).</P>
+
+        <P>But otherwise, yeah... I probably will take it easy on
+        Wednesday and Thursday.  But once that's over I'll put a lot
+        more time into this!  I care about ANYONE who wants to team up
+        as long as you care about my values of writing GOOD code!
+        I look forward to making this work for once :P ~EM</P>
+      ]]></description>
+    </item>
+  </channel>
+</rss>
