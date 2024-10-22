@@ -38,10 +38,10 @@
     <!-- Now let's get to the real part. -->
     <item>
       <title>Hello people of CS300!</title>
-      <author>emeng@cs.wisc.edu (Ethan Meng)</author>
+      <author>meng69@wisc.edu (Ethan Meng)</author>
       <pubDate>Tue, 22 Oct 2024 12:40:47 -0500</pubDate>
-      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair.rss.html#1729618847</link>
-      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair.rss.html#1729618847</guid>
+      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729618847</link>
+      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729618847</guid>
       <description><![CDATA[
         <P>Welcome! Thank you for tuning into my channel I set up in a rush.
         I am making a partner search page, which is probably what led you to
@@ -55,8 +55,8 @@
           generally speaking how many I am considering...</LI>
           <LI>Updates to the search page itself, such as new
           expectations...</LI>
-          <LI>My schedule, such as the precise time I am
-          free, special circumstances, or notices...</LI>
+          <LI>My schedule, such as my exact available time,
+          special circumstances, or other notices...</LI>
         </UL>
 
         <P>This is not a substitute for email communication: those are
@@ -68,7 +68,7 @@
 
         <P>But otherwise, yeah... I probably will take it easy on
         Wednesday and Thursday.  But once that's over I'll put a lot
-        more time into this!  I care about ANYONE who wants to team up
+        more time into this!  I care about anyone who wants to team up
         as long as you care about my values of writing GOOD code!
         I look forward to making this work for once :P ~EM</P>
       ]]></description>
