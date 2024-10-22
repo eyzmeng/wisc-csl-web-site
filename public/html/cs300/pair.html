@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Pardner! :^]</title>
+  <meta name="author" content="Ethan Meng <meng69@wisc.edu>">
+  <meta name="copyright" content="i don't care tbh">
+</head>
+<body><main>
+  <h1>CS300 Partner ?!? [<u>OPEN</u>!]</h1>
+  <p>Ahoy there! Looks like you are interested in being
+  my pardner in crime!<br>Well, you MIGHT be... but READ ON
+  and decide for yourself!</p>
+  <p>(NOTE: This is a LIVING document that is updated as we speak.)</p>
+  <h2>Who are you????</h2>
+  <ul>
+    <li>Freshman living in [[ADDRESS REDACTED]]
+      (please ask privaTEly :O)</li>
+    <li>Major: probably math, probably CS // (whispers) probably BOTH... //</li>
+    <li><a href="http://lowtech.org/projects/n5m3/">Low tech</a> advocate;
+      diehard fan of all text files</li>
+    <li>Git + Vim + Bash &lt;3 (out of here, Microsoft and bloatware!)</li>
+    <li>Spends way too much time being pedantic on Piazza
+      (my favorite answers being @<a href="1012.txt">1012</a>
+      and @<a href="899.txt">899</a>)</li>
+    <li>Bilingual in <span lang="zh-CN" class="zh">中文</span> (native!!! :)</li>
+  </ul>
+  <p>I'm generally free in the afternoon until as late as 2am.
+  (That 2am is a hard limit so that I actually wake up for my
+  morning lectures -- if possible 12am is better :)
+  On weekends I usually don't have anything better to do,
+  so I might also be able to wake up early for you.</p>
+  <p>I'll post a more exact schedule after my hellish exam on Wednesday.</p>
+  <h2>boring. i want to know what you are gOoD at</h2>
+  <ul>
+    <li>Indulged in Python for 4 years, sometimes write in C,
+      forced to write lots of Makefiles and shell scripts...
+      though recently taking a liking to Java :)</li>
+    <li>Learning sockets and networking, web server, mail server;
+      recently been wanting to learn Perl CGI and TAP, and maybe
+      even Haskell... O_O</li>
+    <li>Been using Git for long enough to know a thing or two about a
+      handful of porcelain commands (including git-am, git-format-patch,
+      git-request-pull)</li>
+    <li>Know about IMAP/SMTP SASL auth for MS365 and can probably
+      help you set up a "real" mail client for UW (one that TRULY lives
+      on your 'puter!)</li>
+    <li>Know some stuff about the material covered in CS300
+      (but still am actively learning!)</li>
+  </ul>
+  <p>And I can talk about any of these! (Well, most... within
+  my knowledge...)</p>
+  <p>For CS300 assignments specifically, I can:</p>
+  <ul>
+    <li>Track our code in Git VCS and summarize what our changes are</li>
+    <li>Build Javadoc and host it on a web server visible to just us</li>
+    <li>And you get to hear me rambling more about programming and
+      design and life that I don't get to on PIazza!</li>
+  </ul>
+  <h2>Alright -- I'm down. What do you expect from me?</h2>
+  <p>Some quick items to check off before we get to the long part:</p>
+  <ul>
+    <li>You have a ZIP or tar(gzip) extractor and know how to
+      extract its content to your workspace (Eclipse, IntelliJ,
+      VSCode, Notepad++ --- I don't care.)</li>
+    <li>You should also know how to create an archive out of
+      those files.</li>
+    <li>You know how to attach a file to an email (namely,
+      an archive of your code.  More on email later.)</li>
+    <li>You know how to read <a href="https://www.gnu.org/software/diffutils/manual/html_node/Unified-Format.html">unified diff</a>.
+      This is the language I will be using to represent the
+      changes; this is so that we can make in-line comments
+      for specific parts of the code (we won't use GitHub, by the way.
+      I know GitHub has all the "easy" way to do things like these,
+      but you're my partner --- what's the fun if we're doing things
+      the same way all big companies do? :) There are syntax highlighters you
+      can use to help you read the diff, e.g.
+      <a href="https://pygments.org/demo/">Pygmentize</a>
+      (select "Diff" for language and "default" for style)
+      or Sublime Text (hit Control/Command + P then type
+      "Set Syntax: Diff").  Here is an excerpt diff from my personal
+      project for you to try out: see if you can understand what
+      it is saying!
+<pre>diff --git a/docs/src/psp/types.rst b/docs/src/psp/types.rst
+index 79d0240..75f1c36 100644
+--- a/docs/src/psp/types.rst
++++ b/docs/src/psp/types.rst
+@@ -185,2 +185,2 @@
+       Return a copy of this panel with no entries.  Equivalent to
+-      ``self.from_panel(panel)``.
++      ``self.from_panel(self)``.
+@@ -213,1 +213,5 @@
+-      This is a :class:`ValueError` if *entry* is already added.
++      This is a :class:`ValueError` if *entry* was already added.
++
++   .. method:: Panel.add_entries(entries)
++
++      Iteratively call :meth:`add_entry`.
+@@ -221,3 +230,3 @@
+ 
+       Remove an entry from the current entry by *index* and return it.
+-      An :class:`IndexError` will be raised by :meth:`list.pop` if
++      An :class:`IndexError` will be raised by ``list.pop()`` if
+@@ -622,7 +631,7 @@
+       *  text or binary data (obtained from :meth:`get_data`)
+       *  attributes (from the attribute protocol)
+ 
+-      Note that even if two entries have different encodings, they will
++      Note that if two text entries have different encodings, they will
+       still compare equal as long as their decoded strings match:
+ 
+       &gt;&gt;&gt; from datetime import datetime, timezone
+diff --git a/src/psp/types.py b/src/psp/types.py
+index 49f8ed3..2c75a73 100755
+--- a/src/psp/types.py
++++ b/src/psp/types.py
+@@ -202,4 +202,9 @@ def add_entry(self, entry):
+         entry._set_panel(self)
+         self._entries.append(entry)
+ 
++    def add_entries(self, entries):
++        """Call add_entry() iteratively."""
++        for entry in entries:
++            self.add_entry(entry)
++
+     def remove_entry(self, entry):
+</pre>
+    </li>
+  </ul>
+  <p>In terms of availability please be active enough on email:
+    we can adopt instant messaging for quick messages, but
+    I *will* be relying on email to transfer files (and I will
+    expect you to attach your code through email too).
+    When I send something to you please let me know something,
+    preferrably within 12 hours -- anything at all.  Just let me
+    know if you've received it and when you plan to get back to me
+    if you don't have time right away.
+    (How fast do *I* tend to reply?  Just check my Piazza answers...
+    As long as I'm not burnt out, that is usually not your concern. ;)</p>
+  <p>You are expected to work with emails --- REAL, PLAIN TEXT
+  emails PROPERLY wrapped at 64-76 characters: just like your
+  Java code, the Piazza answer files I linked above, and even this
+  very HTML file (if you click on View Source!).  By work with it
+  I mean even if you are not the one writing such emails, you will
+  be receiving such emails from ME, as I will NOT be writing
+  HTML emails.  And even if you aren't writing plain text emails
+  too, you should follow the netiquette listed from the second point
+  and on.  This is not about the pointless embellishments we are
+  taught to start and end an email with, but the actual conversation
+  whose depth and value are jeopardized by unwieldly and robotic
+  practices popularized and normalized by hostile mail clients designed
+  in a tasteless corporate environment such as Gmail and Outlook.</p>
+  <ol>
+    <li>Please, if possible, use a mail client that actually
+      respects incoming PLAIN TEXT emails, and actually lets
+      you QUOTE SPECIFIC PARTS of an email without copying the
+      entire message and dumping it at the end like garbage.
+      Thunderbird is a great choice, though sadly I don't know
+      many choices besides TUIs like aerc and Mutt (which
+      are NOT easy to use if you don't already use them).
+      If you are fine Thunderbird's interface, I can absolutely
+      help you set it up. There is also Proton Mail, though it's
+      more like for throwaway stuff and I don't recommend it.</li>
+    <li>Quote SPARINGLY: don't quote what you and I don't need
+      (this isn't a mailing list; we have message history --- CC
+      yourself if you are using cs.wisc.edu's SMTP server, because
+      in case your client might is unable to save a receipt when
+      IMAP times out.)  But also quote RESPONSIBLY: when you are
+      replying to a small portion of my email, quote the part being
+      replied to and leave everything else out.  The standard way to
+      quote is with the greater-than sign, "&gt;", like this:
+<pre>Ethan wrote on Wed, Oct XX 5:55 PM:
+&gt; I think findXXX() should throw NoSuchElementFoundException
+&gt; instead of IllegalStateException here.
+
+Oops. That totally slipped my mind. I'll send a patched version
+to you in a moment.
+
+&gt; You threw IllegalArgumentException in addXXX() when the list is
+&gt; full, but we should be ok since the behavior is unspecified. :)
+
+Haha -- doesn't hurt to play it safe!</pre>
+      THIS is the real way to quote, unlike what I'm about to
+      discuss next.
+      <a href="https://mailformat.dan.info/quoting/bottom-posting.html">This page</a>
+      I found gives GREAT examples, and I have written a handful of
+      answers on Piazza you can refer to: @1235 and @1243.</li>
+    <li>(continued) Whatever you do, DO NOT do <a href="https://git-send-email.io/top-posting.html">TOP-POSTING</a>.
+      The mail client that our university uses --- Outlook --- will
+      automatically COPY the ENTIRE MESSAGE, SEND it to the bottom,
+      and HIDE it from you.  If you weren't lucky to switch to a
+      human-friendly mail client already, you need to EXPAND the
+      automatic quoted message and DELETE Outlook's garbage MANUALLY.
+      DO NOT let Outlook quote for you, because it does not have a
+      brain and copies whatever it sees, and it seeks to frame our
+      lively discussion inside a rigid, standardized, lifeless box:
+<pre>
+[Reply reply blah blah blah]
+
+----- Original Message -----
+
+<B>From</B>: "boring full name" &lt;flast14@example.edu&gt;
+<B>Date</B>: Thu, Oct 17, 2024 at 6:47 PM (Outlook -- We KNOW it's 2024.)
+<B>To</B>: "yet another, boring full name, where it literally doesn't matter
+    what the sender intended here instead; Outlook just takes it from
+    the directory as that's more 'manageable'" &lt;flast227@example.edu&gt;
+<B>Subject</B>: the subject re-printed yet again because apparently
+    "Re: SUBJECT" in the headers isn't convincing enough to
+    prove that "SUBJECT" *is* the original subject
+
+[followed by bunch of junk formatted with the most garbage
+machine-generated HTML you will see in your entire life]
+</pre>
+      Microsoft may want us all to have shallow discussions
+      like their terrible ticket system that addresses 0%
+      of the issues; WE WILL <U>NOT</U> LET THAT HAPPEN.</li>
+    <li>Lastly,
+      <a href="http://webfoot.com/advice/email.formality.php">don't
+        take things too seriously</a>!
+      I just hope that we can have a back-and-forth conversation,
+      instead of a one-direction preaching.
+      It's frustrating how "impersonal" you guys write sometimes,
+      but I truly wish this is a chance to get to know you as a
+      person. :)</li>
+  </ol>
+  <p>(... besides getting work done, of course. *ahem*)</p>
+  <p>For our code you should follow CS300 course style guide
+  ON TOP of these rules:</p>
+  <ol>
+    <li>Be consistent with everything: spacing, brace alignment,
+      Javadoc punctuation, etc. We may not match each other's
+      styles, but you must be consistent with YOURSELF.</li>
+    <li>Wrap all comments at 76 characters (with the exception
+      of submission header, hyperlinks, or possibly very long
+      class names such as ArrayIndexOutOfBoundsException).</li>
+    <li>Put at most two lines of code (dangerous code &amp;
+      return/break/continue) in any 'try' block
+      unless you are using a try-finally construct
+      OR whatever situation calls for it.  (I will judge
+      this accordingly.)</li>
+    <li>Always prefer 'return condition;' to 'if (condition)
+      return true;' and 'return !condition;' to 'if (condition)
+      return false;' unless there is code after the if-statement
+      or you plan to add more.</li>
+    <li>Keep the first sentence (summary) of Javadoc 1-3 lines long.
+      Get straight to the point, and if you have nuances to explain,
+      put it in the remainder of the comment, e.g. Don't write:
+      "This method is a method that uses the Baz Algorithm
+      to foo the bar such that bar becomes shiny and..."
+      Write: "This method foos the bar using the Baz Algorithm.
+      The foo'd bar is shiny and..." Or better yet: "Foo(s) the bar
+      using the Baz Algorithm." (Using either <a href="https://peps.python.org/pep-0257/">PEP-257</a>-recommended
+      imperative language or <a href="https://www.oracle.com/technical-resources/articles/java/javadoc-tool.html#styleguide">Oracle's guide</a>
+      of third-person language is completely fine as long as
+      we are both consistent about it.)</li>
+    <li>Any further complaints the Java compiler makes with
+      -Xlint:all and the Javadoc generator makes with
+      -Xdoclint:all MUST be fixed (except undocumented fields).</li>
+  </ol>
+  <p>These should be very basic expectations.  I expect to
+    see you write code that goes beyond these recommendations.
+    (I'm not like scary strict, but I *am* strict!)
+    I only felt the need to lay them out due to my last
+    collaboration being... unexpectedly "subpar".</p>
+  <h2>The EnD!!! Did you make it???</h2>
+  <p>Woohoo! Take a break... that wasn't an easy read I know.</p>
+  <p>I don't expect you to understand it all, or really understand
+    anything in the email part really.  My point is to get you
+    PREPARED for what's to come... IF you decide to be my partner.
+    Think about it!  Like I said, the choice is in your hands...
+    I'm no more desperate for a teammate than I am for a friend :)</p>
+  <p>(By the way, the emails I send you will be VERY similar to this
+    home page --- minimal markup, pure plain text.  You probably
+    need a computer screen to read things, but let's be real,
+    computers are still the REAL deal in the 20s: phones are too
+    small to do or learn anything serious anyways (if not for trapping
+    you in a bottomless scroll pit....) --- the "responsive" web today
+    simply doesn't have its priorities straight!)</p>
+  <p>If you decide to embark on this journey with me, BE SURE TO
+    EMAIL ME!!! Use the netiquette I mentioned to quote certain
+    parts of this email you liked, didn't like, confused by, or...
+    maybe not quote anything at all, if you are just dropping by
+    and say hi.</p>
+  <p>Even if you HATED this whole thing and want to
+    rant about it... I guess you can talk about it, if it's
+    constructive so I knew what I did wrong?
+    I see this is a radical move compared to MOST team-seekers
+    in CS300, but I'd appreciate it if instead of saying "ugh
+    why are you so picky" you said "You overestimated the amount
+    of people in this era that care to [...]" because -- see like
+    one is vague (I'm picky about what? The email part? The code
+    part (which I hope isn't a lot to ask for)?) and the
+    other is specific... so yeah.  Criticisms are okay -- that is
+    if you care enough to write one...</p>
+</main></body>
+</html>

@@ -1,0 +1,167 @@
+# This is 1012.txt.
+# It is an adaptation of my Piazza answer @1012.
+# The original question asks about the peculiarity in the
+# practice of documenting but not declaring unchecked exceptions.
+# I give several reasons for the motivation of documenting them
+# as well as for documenting code in general.
+#
+# 1012.txt is written fully using the US-ASCII character set.
+# Use a monospace font and a screen with at least 76 characters
+# wide for best reading experience. :)
+#
+# Copyright 2024 (C) Yizheng (Ethan) Meng <ethan@rapidcow.org>.
+# This answer (excluding the code snippets) is the product of
+# my time and effort and is not the derivative work of any
+# course content of CS300 at UW--Madison, lecture or assignment.
+#
+# Licensed under Creative Commons BY-NC-SA 4.0.
+# https://creativecommons.org/licenses/by-nc-sa/4.0/
+#
+# (You may change anything starting from this line
+#  but you may NOT remove any line above.  Please share this
+#  writing only in an open file format, encoded in UTF-8,
+#  preferably line-wrapped at 76 characters.  Proprietary but
+#  non-exclusive formats are not prohibited but discouraged.)
+#
+
+The exceptions in the 'throws' DECLARATION in general will be
+a narrower subset of the exceptions we DOCUMENT with '@throws',
+because as you may have noticed, unchecked exceptions DO NOT
+NEED TO BE DECLARED (Java compiles without 'throws Illegal-
+ArgumentException', either when you yourself throw such an
+exception, or when a method you are using may throw such an
+exception), but are occasionally HELPFUL TO BE DOCUMENTED to
+inform the user that they might want to handle them
+  [0] --- though I'd like to note that Item 61 is Item 73 in Ed.3.
+As to what exceptions you might want to consider putting in
+the 'throws' declaration, I think this answer [1] gives a
+good general principle.  (One Javadoc guideline by Oracle [2]
+discourages putting any unchecked exception there at all, but
+you may follow it or not.)
+
+ADDENDUM
+=============
+To further make the point that this is an actual practice used in
+production Java code, I did a little digging in what I believe to be
+the source code of Java (OpenJDK 17) so I can give a few examples of
+when the 'throws' declaration and the '@throws' documentation
+agree/differ.  (The following code is quoted purely for EDUCATIONAL
+PURPOSES.  Please follow the hyperlink to read the class header for
+the license of each code snippet respectively.)
+
++-----------------------------------------------.
+| java.util.ArrayList <E>(int initialCapacity)  |
+*-----------------------------------------------'
+| DOCUMENTATION: https://docs.oracle.com/en/java/javase/17/
+|   docs/api/java.base/java/util/ArrayList.html<init>(int)
+| SOURCE CODE: https://github.com/openjdk/jdk/blob/jdk-17-ga/
+|   src/java.base/share/classes/java/util/ArrayList.java#L147-L163
++------------------------------------------------
+
+    /**
+     * Constructs an empty list with the specified initial capacity.
+     *
+     * @param  initialCapacity  the initial capacity of the list
+     * @throws IllegalArgumentException if the specified initial capacity
+     *         is negative
+     */
+    public ArrayList(int initialCapacity) {
+        if (initialCapacity > 0) {
+            this.elementData = new Object[initialCapacity];
+        } else if (initialCapacity == 0) {
+            this.elementData = EMPTY_ELEMENTDATA;
+        } else {
+            throw new IllegalArgumentException("Illegal Capacity: "+
+                                               initialCapacity);
+        }
+    }
+
+Notice how IllegalArgumentException, an unchecked exception,
+is documented but not declared:
+
++-----------------------------------------------.
+| java.io.FileReader(java.io.File)              |
+*-----------------------------------------------'
+| DOCUMENTATION: https://docs.oracle.com/en/java/javase/17/
+|   docs/api/java.base/java/io/FileReader.html#<init>(java.io.File)
+| SOURCE CODE: https://github.com/openjdk/jdk/blob/jdk-17-ga/
+|   src/java.base/share/classes/java/io/FileReader.java#L63-L76
++------------------------------------------------
+
+    /**
+     * Creates a new {@code FileReader}, given the {@code File} to read,
+     * using the platform's
+     * {@linkplain java.nio.charset.Charset#defaultCharset() default charset}.
+     *
+     * @param      file the {@code File} to read
+     * @throws     FileNotFoundException  if the file does not exist,
+     *             is a directory rather than a regular file,
+     *             or for some other reason cannot be opened for
+     *             reading.
+     */
+     public FileReader(File file) throws FileNotFoundException {
+         super(new FileInputStream(file));
+     }
+
+Notice how FileNotFoundException, a checked exception, is both
+documented and declared. So if you were to use
+  new FileReader("my/awesome/file.txt")
+and, assuming you don't handle it in a try-catch, you would need
+to declare it too, being a checked exception; but I'd say that's
+on the "language" side of Java. The '@throws' tag is not "necessary"
+in that it upsets the compiler, but users might find it a little
+disappointing if they are expected to handle/propagate an exception,
+but are left with nothing (beyond perhaps the source code's
+implementation) to help them understand when and why it would be
+thrown: think of it as being done out of good practice/convention/
+keeping people who read or use your code sane, much like why you
+shouldn't name your classes with camelCase.)
+
++-----------------------------------------------.
+| E java.util.ArrayList <E>.get(int index)      |
+*-----------------------------------------------'
+| DOCUMENTATION: https://docs.oracle.com/en/java/javase/17/
+|   docs/api/java.base/java/util/ArrayList.html#get(int)
+| SOURCE CODE: https://github.com/openjdk/jdk/blob/jdk-17-ga/
+|   src/java.base/share/classes/java/util/ArrayList.java#L419-L429
++------------------------------------------------
+
+    /**
+     * Returns the element at the specified position in this list.
+     *
+     * @param  index index of the element to return
+     * @return the element at the specified position in this list
+     * @throws IndexOutOfBoundsException if the index is out of range
+     *         ({@code index < 0 || index >= size()})
+     */
+    public E get(int index) {
+        Objects.checkIndex(index, size);
+        return elementData(index);
+    }
+
+Same as above except we have IndexOutOfBoundsException.
+I wanted to add this because it highlights the idea that you might
+also want to document exceptions even if your code doesn't EXPLICITLY
+throw them. ('Objects.checkIndex()' doesn't either, if you look into
+it XD --- the real exception gets thrown at a very very low level.)
+
+In fact, the List interface also documents this exception [3]
+--- even though it doesn't have an implementation at all!
+
+====================== TAKEAWAY =======================
+Javadoc (and code documentations in general) should be
+an ABSTRACTION (to the users, of how to USE your code)
+and a thorough SPECIFICATION (to other implementers and
+testers, of how your code SHOULD behave).
+====================== TAKEAWAY =======================
+
+References:
+
+[0]: https://stackoverflow.com/a/25743740
+[1]: https://stackoverflow.com/a/24556727
+[2]: https://www.oracle.com/technical-resources/
+  articles/java/javadoc-tool.html#throwstag
+[3]: https://docs.oracle.com/en/java/javase/17/
+  docs/api/java.base/java/util/List.html#get(int)
+
+# END of 1012.txt.

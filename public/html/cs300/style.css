@@ -1,0 +1,29 @@
+@charset "UTF-8";
+html {
+  font-size: 12pt;
+  color-scheme: light dark;
+}
+
+main, code, pre {
+  font-size: 1.25rem; line-height: 1.25;
+  font-family: "Ubuntu Mono", Consolas, Menlo,
+    "Courier New", "Courier", serif;
+  max-width: 40em; margin: 2rem; padding: 0;
+}
+
+main.index {
+  max-width: 40em; margin: 0 auto; padding: 0 2rem;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center;
+  font-family: "Ubuntu Mono", Consolas, Menlo,
+    "Courier New", "Courier", serif;
+}
+
+main.index h1 {
+  margin: 0;
+}
+
+.zh {
+  font-family: Arial, sans-serif;
+}
