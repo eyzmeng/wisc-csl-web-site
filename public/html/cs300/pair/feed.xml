@@ -98,5 +98,33 @@
         <P>(Now where can I find my other sock...)</P>
       ]]></description>
     </item>
+    <item>
+      <title>33%</title>
+      <author>meng69@wisc.edu (Ethan Meng)</author>
+      <pubDate>Thu, 24 Oct 2024 12:27:59 -0500</pubDate>
+      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729790879</link>
+      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729790879</guid>
+      <description><![CDATA[
+        <P>I'm back from the exam. Getting the assignment due today done
+        will be one of my top two priorities for the rest of the day.
+        Besides that I need sleep because I only slept for 2 hours at
+        the library (where they didn't even like the idea that a
+        sleep-deprived student couldn't stay awake.)</P>
+
+        <P>Oh, and besides that I thought I should let people know that
+        so far nobody has reached out.  My bars are too high, after all.
+        And people don't use Piazza.</P>
+
+        <P>I did get Net::SMTP to work with Microsoft; one last step is
+        to feed stdin into SMTP and I'd be able to send emails free from
+        Microsoft's services and the Outlook storage beyond my control.
+        Yet I've come this far... just to fight alone again.
+        It's like school life where I knew nobody never ended......</P>
+
+        <P>It's okay... at least I get to close it when it's over.
+        I'm glad that I at least posted this time.
+        I won't regret it when I think back to this.</P>
+      ]]></description>
+    </item>
   </channel>
 </rss>
