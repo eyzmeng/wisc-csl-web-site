@@ -74,5 +74,29 @@
         I look forward to making this work for once :P ~EM</P>
       ]]></description>
     </item>
+    <item>
+      <title>Piazza posted</title>
+      <author>meng69@wisc.edu (Ethan Meng)</author>
+      <pubDate>Thu, 24 Oct 2024 00:02:18 -0500</pubDate>
+      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729746138</link>
+      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729746138</guid>
+      <description><![CDATA[
+        <P>Huff, tuff... the hard work was done. PHEW didn't know
+        it was that hard, I thought I had the time to write an
+        interface for MIME encoded word encoder and figure out
+        how to send emails using Perl's Net::SMTP, OR figure out
+        for once what I should do with my life- I mean seas of
+        emails... Time is just not enough man. I can't believe
+        we're halfway through the semester already.</P>
+
+        <P>ANYWAYS -- I will now have to prepare for yet *another* exam
+        tomorrow, UGH! X[ (P.S. the unit quiz we had didn't count as one.)
+        Probably won't be responding to anything if you sent me stuff
+        in the morning. I hope you are fine with that -- I'm not
+        chronically on Piazza waiting for people's questions anyway.</P>
+
+        <P>(Now where can I find my other sock...)</P>
+      ]]></description>
+    </item>
   </channel>
 </rss>
