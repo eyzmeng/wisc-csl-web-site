@@ -1,0 +1,6 @@
+# Ignore file for rsync(1); use with -f:C option
+howto/
+howto/email.html
+howto/ethand.jpg
+howto/ethans.jpg
+howto/index.html
