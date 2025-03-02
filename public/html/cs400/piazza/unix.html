@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Why Unix? &mdash; An extended answer</title>
+  <style type="text/css">
+    html { font-size: 12pt; color-scheme: light dark; }
+    main { font-size: 1.25rem; line-height: 1.25;
+    font-family: "Times New Roman", serif;
+    max-width: 48em; margin: 2rem; padding: 0; }
+    .small { font-size: 80%; margin: 0; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Why Unix? An extended answer</h1>
+  <p class="small"
+  >(In response to the totally unrelated Piazza question,
+      "Why Linux", Post @75.
+      I have zero motivation in re-organizing this
+      into logical sections.
+      Please do not email me to do that.)</p>
+<p>So first off, what is <em>Unix</em>? For one, it is the name of the
+operating system made by <a
+href="https://www.youtube.com/watch?v=EY6q5dv_B-o&amp;t=2149">Ken
+Thompson</a>, <a
+href="https://www.youtube.com/watch?v=NE4ZRPwbNhA">Dennis Ritchie</a>,
+<a href="http://www.catb.org/esr/writings/taoup/html/ch01s06.html">Doug
+McIlory</a>, <a
+href="https://lists.gnu.org/archive/html/bug-sed/2018-06/msg00008.html">Lee
+McMahan</a>, and many others at <a
+href="http://www.catb.org/esr/writings/taoup/html/ch02s01.html">Bell
+Labs near the end of 1960s</a> (which itself was a pun on its source of
+inspiration (frustration?) <em>Multics</em>, where <a
+href="https://www.linuxjournal.com/article/7035">"Multi" is replaced
+with "Uni"</a>. This is to say, from the very beginning, Unix sought to
+be a simplicistic, lightweight, and somewhat wryly speaking, a "<a
+href="https://www.jwz.org/doc/worse-is-better.html">worse</a>" Multics.
+To get an idea of how old Unix is, the Unix time roughly counts the
+number of seconds since its birth, which you can see by typing
+<code>date +%s</code> into your terminal. As of now, it sits at
+approximately 1.74 billion seconds, or about 55 years if you divide it
+by the 31.6 million seconds per year.)</p>
+<p>On the other hand, it is the name of <a
+href="http://www.catb.org/esr/writings/taoup/html/pr01s04.html">a
+trademark</a> spelled with all capital letters (i.e. UNIX) which,
+according to <a href="https://en.wikipedia.org/wiki/Unix">Wikipedia</a>,
+AT&amp;T sold to Novell Inc., who later sold to the now-holder of the
+trademark, <a href="https://unix.org/trademark.html">The Open Group</a>.
+In that respect, a UNIX operating system means any operating system that
+complies by the <a
+href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">Single
+UNIX Specification</a> as certified by The Open Group, such as <a
+href="https://www.opengroup.org/openbrand/register/">IBM AIX and
+macOS</a>, while demoting the BSD lineage and Linux-based operating
+systems to a meager "Unix-like" status (To be fair, even given a chance
+to be UNIX, <a href="https://unix.stackexchange.com/a/278020">GNU
+wouldn't try to</a> due to <a
+href="https://en.wikipedia.org/wiki/UNIX_System_Laboratories,_Inc._v._Berkeley_Software_Design,_Inc.">AT&amp;T's
+proprietary say</a> over the ownership of original UNIX code.)</p>
+<p>The Unix I wanted to talk about is somewhat more abstract than either
+of these: Unix as the lessons, principles, and philosophies, summarized
+by these smart people who made it. Modularity is one thing: Unix
+programs tend to do one job --- atomic, as you might call it. But for a
+Unix program and the one job it does, it does that job very well. And
+one measure of well-ness is <em>interoperability</em>, i.e. how well it
+works with other programs. (Now I just found out that Brian Kernighan
+(who also worked on Unix at Bell Labs and famously co-authored the C
+Programming Language book) has given an elaborate example in the
+AT&amp;T archives of <a
+href="https://www.youtube.com/watch?v=tc4ROCJYbm0&amp;t=330">how the
+Unix pipeline works</a>, so I'll let him demonstrate instead of me
+giving a lengthy example. ;)</p>
+<p>Oh, and there is another point I feel the need to stress:
+<strong>everything in Unix is text.</strong> (Now, the idea of text and
+the fact that it is not a fundamental concept to computers and requires
+an encoding to be interpreted can be foreign to people who simply
+understand text as a Microsoft Word document --- at least in where I'm
+from. But since you've all written plenty of Java code <em>which is 100%
+text</em>, I think everyone should be comfortable with me using that as
+the analogy.) So, just to give you an idea of how much of Unix is text:
+the user database is text (try <code>less /etc/passwd</code>),
+configurations are text (if you've set up your Google Cloud machine, try
+<code>less /etc/ssh/sshd_config</code> as root), command <em>output</em>
+is text, command <em>input</em> is text... of course for some commands
+the input/output can be arbitrary data, but <strong>all Unix programs
+speak in text.</strong> (Of course you may have heard of <a
+href="https://www.youtube.com/watch?v=EwMkInapmF4">everything in Unix is
+a file</a>, from the console standard input/output/error to block
+devices of mass storage devices... but I'm really just emphasizing the
+text aspect/format of Unix's interface here.)</p>
+<p>These are all in very sharp contrast with how things tend to be done
+in the Windows/Mac world: monoliths that do multiple things at once (not
+atomic/modular) and walled-gardens that do not collaborate well with
+other software (lack of interoperability, or worse, vendor lock-in). Of
+course, people normally don't pay much attention to how much RAM the
+constant system update checks Windows runs in the background costs
+(unless they happen use an old laptop that should be obsolete in the
+2020s (definitely not talking about me lol)), or how Windows and Mac
+race to make the "intelligent" operating system at the expense of adding
+more overloaded functionalities and essentially nullifying user privacy
+and control over their own stuff. But these are the precise things that
+make the two tech oligarchs intolerable for people who care about
+softwares that can be plugged into other programs, who care about
+learning the skills to build our own environment from these tiny modular
+pieces to meet our needs; and the freedom to apply that skill to any
+tools that we might come across (or even create ourselves) without
+limiting us to a specific everything-app that fulfills every demand out
+of the box, yet we don't know how to live without because we learn
+nothing from those monolithic apps and <em>how</em> it fulfills those
+demands. While Windows and Mac may be driven by practical ambitions to
+create the most convenient out-of-box experience, and hide the
+nitty-gritty details from end user, the Linux/BSD community has more of
+a DIY mentality: a nerdy obsession to reduce things down to their very
+essence, and keep that and nothing else; and a stubborn spirit to do
+things not because everything is neatly arranged and we're told to do
+such and such, but because we want to understand how things work
+inside-out.... and we want to be in control over our tools, our data,
+our digital home.</p>
+<p>Though admittedly, towards the end, I am showing a bit of <a
+href="www.over-yonder.net/~fullermd/rants/bsd4linux/08"
+title="from https://unix.stackexchange.com/a/14491">bias towards BSD</a>
+because even Linux is slowly losing its Unix heritage (for reasons I
+don't understand, yet somehow resonate deeply with, <a
+href="https://www.youtube.com/watch?v=o_AIw9bGogo">systemd/journald</a>
+was deemed to be Linux's most egregious deviation from the Unix
+philosophy. Oh, and remember I said that all Unix programs speak in
+text? Well <a
+href="https://www.reddit.com/r/unix/comments/11wnw56/comment/jd0jlwh/">journald's
+journal format overtly breaks that principle</a> (I watched a video
+reviewing OpenBSD the other day and <a
+href="https://www.youtube.com/watch?v=oTShQIXSdqM&amp;lc=UgxveJsRckABa_6_Ddp4AaABAg">this
+comment is exactly how I felt</a> XD) For that I am considering trying
+out something like FreeBSD, since while Linux-based systems are a
+hotch-potch of things that feel like Unix though not quite so, the BSD
+family are basically a fork of Bell Labs' Unix back when <a
+href="https://en.wikipedia.org/wiki/Ken_Thompson#1970s">Ken returned to
+UC Berkeley</a>, his alma mater, where he helped install a version of
+Unix that would become known as the Berkeley Software Distribution, or
+BSD. The quality and brevity of the man pages of BSD too seem to inherit
+the more pure Unix genes than Linux does (remember Multics, the
+revolutionary yet sophisticated system that Unix was
+<em>specifically</em> invented to replace? Yep, that's what I think the
+most important part of Unix is. Small is beautiful, less is more... if
+your man page takes more than hundreds of lines to document a program
+(note: this isn't quite the same as writing a general
+information/tutorial manual. I think there are separate places for
+those, like section 7 or something...) then it probably does too many
+things at once and should be broken down into smaller pieces.) I also
+heard that they have <a
+href="https://news.ycombinator.com/item?id=29570311">a superb
+handbook</a> (the astute reader who pay attention to the hyperlink I
+reference for man pages in my various answers here may have noticed my
+recent inclusion of FreeBSD man pages over those of Arch Linux. Well...
+I guess you now know that it was by no means an accident. ;)</p>
+<p>Fun fact (keeping this for my record since it makes me chuckle,
+though you may find it funny too): a while ago some people who live on
+the same floor as me were asking my eccentric IDE-less setup, and I told
+them <a
+href="https://www.reddit.com/r/linux/comments/zzcc15/comment/j2b0ukc/">this
+weird obsession I had with Unix</a> when using my first ever laptop ---
+a MacBook --- ever since discovering the terminal and vimtutor
+(accidentally --- I'm not sure if I read vim's help page, looked up vim,
+or just typed <code>vim</code> and pressed TAB to let autocomplete
+suggest commands and <code>vimtutor</code> pops up...) And I thought
+Arch would be my final destination!</p>
+</main>
+</body>
+</html>
