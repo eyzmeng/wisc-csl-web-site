@@ -79,7 +79,7 @@ figure {
   private, and public addresses reside.  I'd like to cite RFC, but...
   take this as "common sense" for now.  (I'm looking at RFC 1918 and
   5735 though)</p>
-<pre>127.0.0.0/8          - loopback, typically
+<pre><code>127.0.0.0/8          - loopback, typically
 (So 127.0.0.0 up to 127.255.255.255)
 (This is roughly 256 addrs)
 
@@ -94,7 +94,7 @@ figure {
 192.168.0.0/16       - private (Class C)
 (So 192.168.0.0 up to 192.168.255.255)
 (This is roughly 256^2 addrs)
-</pre>
+</code></pre>
   <p>
     I am saying roughly because you can't really use all addresses
     from what I read?  I don't know?  But those are the general
@@ -130,15 +130,15 @@ figure {
   <p>If all else fails (for example iSH Alpine on my iPhone)
   I like to do this funny thing where I create an HTTP server
   that can be accessed publicly:</p>
-<pre>python3 -m http.server -d /var/empty -b 0.0.0.0 8000</pre>
+<pre><code>python3 -m http.server -d /var/empty -b 0.0.0.0 8000</code></pre>
   <p>Then I visit http://10.x.x.x:8000, whatever the address of
   this HTTP server may be, and read the IP address from the
   access log... it's nasty but works for me :)</p>
   <p>P.S. You can get your public address by using something like
   <a target="_blank" href="https://ifconfig.me">ifconfig.me</a> or
   <a target="_blank" href="https://mxtoolbox.com/whatismyip/">mxtoolbox.com/whatismyip/</a>:</p>
-<pre>$ curl https://ifconfig.me
-72.33.2.155</pre>
+<pre><code>$ curl https://ifconfig.me
+72.33.2.155</code></pre>
   <p>But in my opinion that's the less interesting part,
   since people from outside the network can't really access
   your computer from that address.  (But that's my way of saying,
@@ -151,7 +151,7 @@ figure {
   in disguise.  And this is no secret.  Whether you try to access
   a web page:
   </p>
-<pre>$ openssl s_client -nocommands -quiet -crlf -connect pages.cs.wisc.edu:443
+<pre><code>$ openssl s_client -nocommands -quiet -crlf -connect pages.cs.wisc.edu:443
 &gt; Connecting to 128.105.7.9
 &gt; depth=2 C=US, O=Internet Security Research Group, CN=ISRG Root X1
 &gt; verify return:1
@@ -173,9 +173,9 @@ Connection: close
 &gt; Vary: Accept-Encoding
 &gt; Connection: close
 &gt; Content-Type: text/html
-</pre>
+</code></pre>
 <p>Or connect to an SSH server via telnet, as I've shown in the answer:</p>
-<pre>$ telnet git.doit.wisc.edu 22
+<pre><code>$ telnet git.doit.wisc.edu 22
 Trying 128.104.31.113...
 Connected to git.doit.wisc.edu.
 Escape character is '^]'.
@@ -183,7 +183,7 @@ SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.11
 ^]
 telnet&gt; q
 Connection closed.
-</pre>
+</code></pre>
 <p>You will see that there is this conspicuous message at the top
 showing you the actual thing it is connecting to: an IPv4 address.
 How does it know the IPv4 address?  Well, if my knowledge of DNS
@@ -220,7 +220,7 @@ I too can control the A record... to some extent.  For example,
 I made the "cs400-vm" subdomain point to the Google Cloud Compute
 machine:
 </p>
-<pre>$ dig A +short cs400-vm.yizx.net
+<pre><code>$ dig A +short cs400-vm.yizx.net
 34.59.135.193
 
 $ curl -v http://cs400-vm.yizx.net/
@@ -261,7 +261,7 @@ $ curl -v http://cs400-vm.yizx.net/
 &lt;/body&gt;
 &lt;/html&gt;
 * Connection #0 to host cs400-vm.yizx.net left intact
-</pre>
+</code></pre>
 <p>(Now if you ask me kindly, I can spare you a subdomain for the
 duration your Google Cloud Compute engine is useful for... :)
 but that's besides the point.</p>
