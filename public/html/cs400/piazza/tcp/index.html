@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tolking to puters over TCP</title>
+<style>
+html {
+  color-scheme: light dark;
+  margin: 2em;
+  font-size: 15pt;
+}
+h1 {
+  font-size: 2.0em;
+}
+h2 {
+  font-size: 1.5em;
+}
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 100%;
+}
+</style>
+</head>
+<body>
+  <figure><a
+    target="_blank"
+    href="https://www.tumblr.com/cnaaawd/682504026606157824/reblog-if-this-is-u-rn-real"
+  ><img
+    src="https://64.media.tumblr.com/7ad7fd8c10d50f2270cac09567a19671/2cf55a0cc2d75944-b4/s540x810/eb6f5977677611dfac3d1b5c6de61ab0b1290ab8.pnj"
+    alt="tolking to my frends // on da cmputer!!!"></a>
+  </figure>
+  <h1>How Computers Talk</h1>
+  <p>(Not an answer to the Piazza question that sparked
+  this; I've written that already.  It was boring. :.)</p>
+  <p>Once upon a time there were computers.
+  There were also telephones, telegraphs, which people
+  used to talk to other people.  People wondered if
+  computers could also talk like them, perhaps over a
+  similar sort of telephone wire...</p>
+  <blockquote>You find the number you want to dial from your phone
+  book first by flipping to the right section using an index;
+  inside the section may be finer divisions; and finally you
+  reach the number, dial it up.  The other person picks up
+  the phone, and... you got two people talking.</blockquote>
+  <p>Okay, maybe that wasn't entirely accurate, and that
+  most likely wasn't the single reason that sparked TCP/IP.
+  But the analogy is close as far as I am concerned.
+  Namely:
+  </p>
+  <ul>
+    <li>The phone book is DNS (Domain Name System), and the
+      index would be DNS Servers;</li>
+    <li>The section would be the TLD (Top-Level Domain,
+      that includes generic TLDs like .com, country-code TLDs
+      like .me, and
+      <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Top-level_domain#Types">more</a>);</li>
+    <li>The finer divisions by the way are
+      <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Second-level_domain">second-level domains</a>,
+      The most famous one is perhaps .ac.uk, which is like the .edu in UK.
+      There, .ac is the second-level domain, a finer division within the
+      .uk country-code TLD.  (In China we are less creative :P we just follow
+      the same name as US: .edu.cn)</li>
+    <li>The phone number is the Internet Protocol address
+      (known better as IP address);</li>
+    <li>The telephone line is like the Transmission Control Protocol
+      (TCP).  And the picking-up-phone would be "accepting"
+      the connection.</li>
+  </ul>
+  <p>Very much a flawed analogy, but what does carry over is their
+  importance. Telephones revolutionized the way people communicate,
+  just like the way the Internet revolutionized... the way computers
+  communicate.  Yeah that sounded better in my head.  Anyway.</p>
+  <h2>Getting IP Address</h2>
+  <p>I'll talk about the IPv4 family, since like the softwares,
+  my brain has not adapted to IPv6 yet&hellip;</p>
+  <p>In IPv4, it's important to know the blocks in which the loopback,
+  private, and public addresses reside.  I'd like to cite RFC, but...
+  take this as "common sense" for now.  (I'm looking at RFC 1918 and
+  5735 though)</p>
+<pre>127.0.0.0/8          - loopback, typically
+(So 127.0.0.0 up to 127.255.255.255)
+(This is roughly 256 addrs)
+
+10.0.0.0/8           - private (Class A)
+(So 10.0.0.0 up to 10.255.255.255)
+(This is roughly 256^3 addrs)
+
+172.16.0.0/12        - private (Class B)
+(172.16.0.0 up to 172.31.255.255)
+(This is roughly 256^2 x 16 addrs)
+
+192.168.0.0/16       - private (Class C)
+(So 192.168.0.0 up to 192.168.255.255)
+(This is roughly 256^2 addrs)
+</pre>
+  <p>
+    I am saying roughly because you can't really use all addresses
+    from what I read?  I don't know?  But those are the general
+    ranges.  Technically the entirety of 127/8 is loopback, but
+    in practice it's just 127/32.  Often, 127.0.0.1 is *the*
+    loopback addresses, although we also call it localhost.)
+  </p>
+  <p>
+    I learned the importance of knowing the block of private
+    address, because one time I entered 193.168.x.x instead of
+    192.168.x.x while copying the IP address from another
+    computer, and when I tried to SSH into it my connection
+    actually went through several network hops and ended up
+    connecting to a Russian server... so yeah.  There are some
+    digits you are allowed to mess up when copying an IP address
+    and your connection will stay in your local network: 192.168
+    are not one of them.
+  </p>
+  <p>
+    Oh yeah, I did mention getting the IP address.  How'd you
+    really do that though?  Here are a few ways I do (not
+    comprehensive nor guaranteed to work by any means):
+  </p>
+  <ul>
+  <li><code>ipconfig getifaddr en0</code> (on Mac; en0
+  is the name of the Ethernet interface)</li>
+  <li><code>ifconfig -a</code>, then look for something like
+    wlan0 (on BSD and Linux)</li>
+  <li><code>ip a</code>, then look for something like
+    wlan0 (on Linux; the command is short for
+  <code>ip address</code>)</li>
+  </ul>
+  <p>If all else fails (for example iSH Alpine on my iPhone)
+  I like to do this funny thing where I create an HTTP server
+  that can be accessed publicly:</p>
+<pre>python3 -m http.server -d /var/empty -b 0.0.0.0 8000</pre>
+  <p>Then I visit http://10.x.x.x:8000, whatever the address of
+  this HTTP server may be, and read the IP address from the
+  access log... it's nasty but works for me :)</p>
+  <p>P.S. You can get your public address by using something like
+  <a target="_blank" href="https://ifconfig.me">ifconfig.me</a> or
+  <a target="_blank" href="https://mxtoolbox.com/whatismyip/">mxtoolbox.com/whatismyip/</a>:</p>
+<pre>$ curl https://ifconfig.me
+72.33.2.155</pre>
+  <p>But in my opinion that's the less interesting part,
+  since people from outside the network can't really access
+  your computer from that address.  (But that's my way of saying,
+  "I don't know what you can do with this address".  It could be
+  useful for what it's worth.)
+  </p>
+<h2>Domain Name System: Phonebook of the Internet</h2>
+  <p>But before I go, I'll leave you with this: the silly domain
+  names you see all around?  Those are really public IP addresses
+  in disguise.  And this is no secret.  Whether you try to access
+  a web page:
+  </p>
+<pre>$ openssl s_client -nocommands -quiet -crlf -connect pages.cs.wisc.edu:443
+&gt; Connecting to 128.105.7.9
+&gt; depth=2 C=US, O=Internet Security Research Group, CN=ISRG Root X1
+&gt; verify return:1
+&gt; depth=1 C=US, O=Let's Encrypt, CN=R11
+&gt; verify return:1
+&gt; depth=0 CN=pages.cs.wisc.edu
+&gt; verify return:1
+GET /~emeng/piazza.html HTTP/1.1
+Host: pages.cs.wisc.edu
+Connection: close
+
+&gt; HTTP/1.1 200 OK
+&gt; Date: Sat, 29 Mar 2025 23:34:41 GMT
+&gt; Server: Apache
+&gt; Last-Modified: Tue, 11 Feb 2025 07:27:40 GMT
+&gt; ETag: "b7e-62dd8c285d300"
+&gt; Accept-Ranges: bytes
+&gt; Content-Length: 2942
+&gt; Vary: Accept-Encoding
+&gt; Connection: close
+&gt; Content-Type: text/html
+</pre>
+<p>Or connect to an SSH server via telnet, as I've shown in the answer:</p>
+<pre>$ telnet git.doit.wisc.edu 22
+Trying 128.104.31.113...
+Connected to git.doit.wisc.edu.
+Escape character is '^]'.
+SSH-2.0-OpenSSH_8.9p1 Ubuntu-3ubuntu0.11
+^]
+telnet&gt; q
+Connection closed.
+</pre>
+<p>You will see that there is this conspicuous message at the top
+showing you the actual thing it is connecting to: an IPv4 address.
+How does it know the IPv4 address?  Well, if my knowledge of DNS
+serves me right (and I have no sources to back up this one),
+it goes roughly like this:
+</p>
+<ul>
+  <li>First off, your computer performs a domain name analysis.
+  It's like among computers, there is an agreed-upon convention
+  for what are TLDs and what are not.  Here in each of the domain,
+  .edu is the TLD, wisc.edu is the apex domain name, while git.doit
+  and pages.cs are the subdomains respectively.  (The thing that
+  I recall <a target="_blank" rel="noopener" href="https://www.bcs.org/articles-opinion-and-research/isnt-it-semantic">the inventor of the Web</a>
+  lamenting is the way domains are written backward, from specific
+  to general instead of the other way around.  But it's kind of like
+  US/UK date format versus the ISO date, we just get used to it...
+  well at least some of us do I believe. :.)</li>
+  <li>Then it asks the name server of the .edu TLD: "where is wisc.edu?"
+  and it points to the name server of wisc.edu.  And then it asks that
+  "where is your subdomain pages.cs/git.doit?"  And then it finally
+  returns an _A record_ (A stands for address).  The first two parts
+  might be grossly inaccurate considering how universities are kind of
+  their own boss (in other words wisc.edu may be its own name server...
+  whatever the heck that means.)  But for those of us mere mortals who
+  own domains with generic TLDs like .org and .net, that is what happens:
+  the .org TLD goes to Public Interest Registry while .net goes to
+  Verisign.  Then it goes to the registrar's name server because I am
+  not my own name server; that is provided by my registrar.</li>
+</ul>
+<p>Now, there is also the AAAA address, but like I said, I don't
+want to be thinking about IPv6 today.  So A records will be all
+that matters.  And yes, as the owner (loaner?) of a domain name,
+I too can control the A record... to some extent.  For example,
+I made the "cs400-vm" subdomain point to the Google Cloud Compute
+machine:
+</p>
+<pre>$ dig A +short cs400-vm.yizx.net
+34.59.135.193
+
+$ curl -v http://cs400-vm.yizx.net/
+* Host cs400-vm.yizx.net:80 was resolved.
+* IPv6: (none)
+* IPv4: 34.59.135.193
+*   Trying 34.59.135.193:80...
+* Connected to cs400-vm.yizx.net (34.59.135.193) port 80
+* using HTTP/1.x
+&gt; GET / HTTP/1.1
+&gt; Host: cs400-vm.yizx.net
+&gt; User-Agent: curl/8.12.1
+&gt; Accept: */*
+&gt;
+* Request completely sent off
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx/1.26.3
+&lt; Date: Sat, 29 Mar 2025 23:56:26 GMT
+&lt; Content-Type: text/html
+&lt; Content-Length: 299
+&lt; Last-Modified: Sat, 01 Mar 2025 02:48:11 GMT
+&lt; Connection: keep-alive
+&lt; ETag: "67c2756b-12b"
+&lt; Accept-Ranges: bytes
+&lt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title&gt;Hello world&lt;/title&gt;
+        &lt;style&gt;
+        body { font-size: 150%; }
+        &lt;/style&gt;
+&lt;/html&gt;
+&lt;body&gt;
+        &lt;p&gt;Hello CS400 from the Web&lt;/p&gt;
+&lt;hr&gt;
+        &lt;p&gt;Powered by &lt;a href="https://nginx.org/"&gt;Nginx&lt;/a&gt; and &lt;a href="https://www.freebsd.org/"&gt;FreeBSD&lt;/a&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+* Connection #0 to host cs400-vm.yizx.net left intact
+</pre>
+<p>(Now if you ask me kindly, I can spare you a subdomain for the
+duration your Google Cloud Compute engine is useful for... :)
+but that's besides the point.</p>
+<h2>You can send emails too!</h2>
+<p>SMTP is one of if not the most talkative protocol that exists today.
+I've written something about that! You can start <a href="smtp.html">here</a> :)</p>
+</html>

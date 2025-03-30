@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>The Simple Mail Transfer Protocol</title>
+  <meta name="description" content="one of the oldest internet protocols" />
+<!--
+These stylesheets come from GNOME Apostrophe
+I have no idea where I'm supposed to credit
+them, um...
+https://apps.gnome.org/Apostrophe/
+-->
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+</style>
+  <style type="text/css">@font-face {
+font-family: fira-sans;
+src: local("FiraSans-Regular");
+}
+@font-face {
+font-family: fira-mono;
+src: local("FiraMono-Regular");
+}
+@font-face {
+font-family: color-emoji;
+src: local("Noto Color Emoji"), local("Apple Color Emoji"), local("Segoe UI Emoji"), local("Segoe UI Symbol");
+}
+:root {
+--text-color: #24292e;
+--background-color: #ffffff;
+--alt-background-color: #f6f8fa;
+--link-color: #0366d6;
+--blockquote-text-color: #6a737d;
+--blockquote-border-color: #dfe2e5;
+--header-border-color: #eaecef;
+--hr-background-color: #e1e4e8;
+--table-tr-border-color: #c6cbd1;
+--table-td-border-color: #dfe2e5;
+--kbd-text-color: #444d56;
+--kbd-background-color: #fafbfc;
+--kbd-border-color: #c6cbd1;
+--kbd-shadow-color: #959da5;
+}
+* {
+box-sizing: border-box;
+}
+html {
+font-size: 16px;
+}
+body {
+color: var(--text-color);
+background-color: var(--background-color);
+font-family: "Fira Sans", fira-sans, sans-serif, color-emoji;
+line-height: 1.5;
+word-wrap: break-word;
+max-width: 980px;
+margin: auto;
+margin-top: 60px;
+padding: 4em;
+}
+@media screen and (max-width: 799px) {
+html {
+font-size: 14px;
+}
+body {
+padding: 1em;
+}
+}
+@media screen and (min-width: 1280px) {
+html {
+font-size: 18px;
+}
+}
+a {
+background-color: transparent;
+color: var(--link-color);
+text-decoration: none;
+}
+a:active,
+a:hover {
+outline-width: 0;
+}
+a:hover {
+text-decoration: underline;
+}
+strong {
+font-weight: bold;
+}
+img {
+border-style: none;
+}
+hr {
+box-sizing: content-box;
+height: 0.25em;
+padding: 0;
+margin: 1.5em 0;
+overflow: hidden;
+background-color: var(--hr-background-color);
+border: 0;
+}
+hr::before {
+display: table;
+content: "";
+}
+hr::after {
+display: table;
+clear: both;
+content: "";
+}
+input {
+font-family: inherit;
+font-size: inherit;
+line-height: inherit;
+margin: 0;
+overflow: visible;
+}
+[type="checkbox"] {
+box-sizing: border-box;
+padding: 0;
+}
+table {
+border-spacing: 0;
+border-collapse: collapse;
+}
+td,
+th {
+padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+font-weight: bold;
+margin: 0;
+}
+h1 {
+font-size: 2em;
+}
+h2 {
+font-size: 1.5em;
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+}
+p {
+margin-top: 0;
+margin-bottom: 0.625em;
+}
+blockquote {
+margin: 0;
+}
+ul,
+ol {
+padding-left: 0;
+margin-top: 0;
+margin-bottom: 0;
+}
+ol ol,
+ul ol {
+list-style-type: lower-roman;
+}
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+list-style-type: lower-alpha;
+}
+dd {
+margin-left: 0;
+}
+code,
+kbd,
+pre {
+font-family: "Fira Mono", fira-mono, monospace, color-emoji;
+font-size: 1em;
+word-wrap: normal;
+}
+code {
+border-radius: 0.1875em;
+font-size: 0.85em;
+padding: 0.2em 0.4em;
+margin: 0;
+}
+pre {
+margin-top: 0;
+margin-bottom: 0;
+font-size: 0.75em;
+}
+pre>code {
+padding: 0;
+margin: 0;
+font-size: 1em;
+word-break: normal;
+white-space: pre;
+background: transparent;
+border: 0;
+}
+.highlight {
+margin-bottom: 1em;
+}
+.highlight pre {
+margin-bottom: 0;
+word-break: normal;
+}
+.highlight pre,
+pre {
+padding: 1em;
+overflow: auto;
+font-size: 0.85em;
+line-height: 1.5;
+background-color: var(--alt-background-color);
+border-radius: 0.1875em;
+}
+pre code {
+background-color: transparent;
+border: 0;
+display: inline;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+}
+.pl-0 {
+padding-left: 0 !important;
+}
+.pl-1 {
+padding-left: 0.25em !important;
+}
+.pl-2 {
+padding-left: 0.5em !important;
+}
+.pl-3 {
+padding-left: 1em !important;
+}
+.pl-4 {
+padding-left: 1.5em !important;
+}
+.pl-5 {
+padding-left: 2em !important;
+}
+.pl-6 {
+padding-left: 2.5em !important;
+}
+.markdown-body::before {
+display: table;
+content: "";
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: "";
+}
+.markdown-body>*:first-child {
+margin-top: 0 !important;
+}
+.markdown-body>*:last-child {
+margin-bottom: 0 !important;
+}
+a:not([href]) {
+color: inherit;
+text-decoration: none;
+}
+.anchor {
+float: left;
+padding-right: 0.25em;
+margin-left: -1.25em;
+line-height: 1;
+}
+.anchor:focus {
+outline: none;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+margin-top: 0;
+margin-bottom: 1em;
+}
+blockquote {
+padding: 0 1em;
+color: var(--blockquote-text-color);
+border-left: 0.25em solid var(--blockquote-border-color);
+}
+blockquote>:first-child {
+margin-top: 0;
+}
+blockquote>:last-child {
+margin-bottom: 0;
+}
+kbd {
+display: inline-block;
+padding: 0.1875em 0.3125em;
+font-size: 0.6875em;
+line-height: 1;
+color: var(--kbd-text-color);
+vertical-align: middle;
+background-color: var(--kbd-background-color);
+border: solid 1px var(--kbd-border-color);
+border-bottom-color: var(--kbd-shadow-color);
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 var(--kbd-shadow-color);;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+margin-top: 1.5em;
+margin-bottom: 1em;
+font-weight: bold;
+line-height: 1.25;
+}
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+text-decoration: none;
+}
+h1 {
+padding-bottom: 0.3em;
+font-size: 2em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h2 {
+padding-bottom: 0.3em;
+font-size: 1.5em;
+border-bottom: 1px solid var(--header-border-color);
+}
+h3 {
+font-size: 1.25em;
+}
+h4 {
+font-size: 1em;
+}
+h5 {
+font-size: 0.875em;
+}
+h6 {
+font-size: 0.85em;
+opacity: 0.67;
+}
+ul,
+ol {
+padding-left: 2em;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+margin-top: 0;
+margin-bottom: 0;
+}
+li {
+overflow-wrap: break-word;
+}
+li>p {
+margin-top: 1em;
+}
+li+li {
+margin-top: 0.25em;
+}
+dl {
+padding: 0;
+}
+dl dt {
+padding: 0;
+margin-top: 1em;
+font-size: 1em;
+font-style: italic;
+font-weight: bold;
+}
+dl dd {
+padding: 0 1em;
+margin-bottom: 1em;
+}
+table {
+display: block;
+width: 100%;
+overflow: auto;
+}
+table th {
+font-weight: bold;
+}
+table th,
+table td {
+padding: 0.375em 0.8125em;
+border: 1px solid var(--table-td-border-color);
+}
+table tr {
+background-color: var(--background-color);
+border-top: 1px solid var(--table-tr-border-color);
+}
+table tr:nth-child(2n) {
+background-color: var(--alt-background-color);
+}
+img {
+max-width: 100%;
+box-sizing: content-box;
+}
+img[align=right] {
+padding-left: 1.25em;
+}
+img[align=left] {
+padding-right: 1.25em;
+}
+.task-list-item {
+list-style-type: none;
+}
+.task-list-item+.task-list-item {
+margin-top: 0.1875em;
+}
+.task-list-item input {
+margin: 0 0.2em 0.25em -1.6em;
+vertical-align: middle;
+}
+:root {
+--text-color: rgba(0, 0, 0, 0.8);
+--background-color: #f5f5f5;
+--alt-background-color: #eeeeee;
+--link-color: #0d71de;
+--blockquote-text-color: #747e85;
+--blockquote-border-color: #d6d8da;
+--header-border-color: #e1e2e4;
+--hr-background-color: #d8dadd;
+--table-tr-border-color: #bdc1c6;
+--table-td-border-color: #d6d8da;
+--kbd-text-color: #4e585e;
+--kbd-background-color: #f1f1f1;
+--kbd-border-color: #bdc1c6;
+--kbd-shadow-color: #8c939a;
+}
+@media (prefers-color-scheme: dark) {
+:root {
+--text-color: #eeeeee;
+--background-color: #282828;
+--alt-background-color: #3a3a3a;
+--link-color: #b5daff;
+--blockquote-text-color: #a8a8a6;
+--blockquote-border-color: #525252;
+--header-border-color: #474747;
+--hr-background-color: #505050;
+--table-tr-border-color: #696969;
+--table-td-border-color: #525252;
+--kbd-text-color: #cececc;
+--kbd-background-color: #3c3c3c;
+--kbd-border-color: #696969;
+--kbd-shadow-color: #979797;
+--anchorlink-color: #a8a8a8;
+}
+}
+</style>
+<style>
+/* This is Ethan's addition! (by that, I mean...
+   I've used this before for my website.) */
+a.anchorlink:hover:after { content: "\00B6"; }
+/* Headers are containers for anchor links */
+h1,h2,h3,h4,h5,h6 { position: relative; }
+a.anchorlink {
+text-decoration: none; /* no underline */
+position: absolute; top: 0; left: -1em;
+color: var(--anchorlink-color);
+min-width: 1em; min-height: 100%;
+}
+</style>
+</head>
+<body>
+<!-- Alright fine Pandoc... we're writing xhtml today I guess -->
+<h1>The Simple Mail Transfer Protocol</h1>
+<p>(<em>This was written one day after @1606&hellip;</em>)</p>
+<blockquote><p>&hellip;I should note that SSH isn’t quite a protocol you can talk to. Even
+though SSH greets us with text, the rest of the key exchange happens in
+binary (I think… I am not familiar with the SSH protocol itself at all.)
+But you know what is plain text? Besides Telnet because I don’t have a
+good telnet server in mind (except of course <a
+href="https://www.youtube.com/watch?v=rDS7lRcGxgI">towel.blinkenlights.nl</a>).
+And HTTP… they’re gonna teach that and whatever they teach is now boring
+:) FTP nobody likes them anymore (well not some people screaming to get
+rid of “unsecure” protocols from the internet). Oh but how can I forget
+SMTP, the Simple Mail Transfer Protocol. The protocol that hearkens back
+to the days of ARPANET, that co-existed with USENET (that’s NNTP), yet
+while that fell into obscurity, SMTP by some miraculous means survives…
+that which we call email today, still runs on one of the oldest
+protocols of the Internet. Its amicability still eager to <a
+href="https://datatracker.ietf.org/doc/html/rfc3207#section-5">shake
+your hands</a>, despite incubated in a time where no fancy graphics
+existed; just lines and lines of text on an 80-column screen (somehow,
+uh. I’m not old, so naturally I don’t know why. I do find it somewhat
+ironic that programs developed from such a time are more human than
+those today, despite people having much less to express humanity
+with.)</p></blockquote>
+<p>But hey! You gotta admit this stylesheet is pretty dope.
+Thanks <a target="_blank" rel="noopener" href="https://pandoc.org/">Pandoc</a>
+and <a target="_blank" rel="noopener" href="https://apps.gnome.org/Apostrophe/">Apostrophe</a>. :)</p>
+<center style="text-align:center;">* * *</center>
+<p>Actually, I am feeling particularly generous today. Since you found telnet interesting, let’s look at how to send an email! (Something I think every CS student should know, but I’m too impatient to wait for the 5XX course to come. :)</p>
+<p>Fun fact, the mail relay protocol fondly known as SMTP since the days of ARPANET can be found as the sixth most frequently visited TCP port, i.e., just below ssh:</p>
+<pre><code>$ curl -sfLo - https://raw.githubusercontent.com/nmap/nmap/refs/heads/master/nmap-services | grep -v &#39;^#&#39; | sed &#39;s/ *#.*$//&#39; | sort -srnk 3 | grep \/tcp | head -5 | column -t
+http    80/tcp   0.484143
+telnet  23/tcp   0.221265
+https   443/tcp  0.208669
+ftp     21/tcp   0.197667
+ssh     22/tcp   0.182286
+smtp    25/tcp   0.131314</code></pre>
+<p>Sadly, most (if not all) internet-facing servers today ban port 25 because of <a href="https://en.wikipedia.org/wiki/Spam_%28food%29#Monty_Python_sketch_and_email_spam">spam</a>. <em>But</em>… not on the internal network of CSL machines. If you try to connect to localhost:25 like I did accidentally one day, you will find…</p>
+<pre><code>$ telnet localhost 25
+Trying 127.0.0.1...
+Connected to localhost.cs.wisc.edu.
+Escape character is &#39;^]&#39;.
+220 snares-06.cs.wisc.edu ESMTP Postfix (Ubuntu)</code></pre>
+<p>… that it listens. So, as I promised. Here is how to send an email.</p>
+<h2 id="telnet">Sending email in CSL (telnet)<a class="anchorlink" href="#telnet"></a></h2>
+<p>For the example, I will represent the CSL username/<code>$USER</code> as bbadger (that seems appropriate I guess); replace it with your own.</p>
+<ol type="1">
+<li><p>Type <code>telnet localhost 25</code>. (you can use nc(1) too, but shhh… I’ll pretend I don’t know that ;)</p></li>
+<li><p>Greet it with a Extended HeLlO (<a href="https://datatracker.ietf.org/doc/html/rfc2821#section-4.1.1.1">EHLO</a>)!</p>
+<pre><code>EHLO localhost
+&gt; 250-snares-06.cs.wisc.edu
+&gt; 250-PIPELINING
+&gt; 250-SIZE 24576000
+&gt; 250-VRFY
+&gt; 250-ETRN
+&gt; 250-ENHANCEDSTATUSCODES
+&gt; 250-8BITMIME
+&gt; 250-DSN
+&gt; 250 CHUNKING</code></pre>
+<p>This seems optional, but some mail servers expect you to greet it at least once. Plus, I think it’s more polite this way.</p>
+<p><strong>Notation</strong>: <code>&gt;</code> indicates the SMTP server’s output. You won’t see them appear literally in your terminal, but you will know because you didn’t type them.</p></li>
+<li><p>Tell it who you are and which mailboxes you want to send to. We do this with the <code>MAIL</code> and <code>RCPT</code> verbs. (Normally, you’d want to authenticate with <a href="https://en.wikipedia.org/wiki/Simple_Authentication_and_Security_Layer">SASL</a> first, but in this case we don’t because in a sense being logged in already authenticates you (?) which I think is pretty nice.)</p>
+<pre><code>MAIL FROM:&lt;bbadger@cs.wisc.edu&gt; BODY=8BITMIME
+&gt; 250 2.1.0 Ok
+RCPT TO:&lt;alice@example.org&gt;
+&gt; 250 2.1.5 Ok
+RCPT TO:&lt;bob@example.org&gt;
+&gt; 250 2.1.5 Ok</code></pre>
+<p>Of course, replace those example mailboxes with real email addresses; and only include as many recipients (<code>RCPT</code>) as you want to send to.</p>
+<p><strong>Note</strong>: This won’t put the email you are about to write into your mail server. If you want to keep a “receipt” of this sent email, a quick and dirty trick I found is to mail to yourself:</p>
+<pre><code>RCPT TO:&lt;bbadger@cs.wisc.edu&gt;
+&gt; 250 2.1.5 Ok</code></pre>
+<p>A mail client (<a href="https://en.wikipedia.org/wiki/Email_client">MUA</a>) would typically directly store the message with POP/IMAP, but I won’t be covering that. (FWIW, I know IMAP is a lot more painful to type by hand than SMTP. :)</p></li>
+<li><p>Here’s my favorite part: we get to write the actual email message, using the DATA verb. Here’s the syntax:</p>
+<pre><code>DATA
+&lt;line 1&gt;
+&lt;line 2&gt;
+...
+&lt;line n&gt;
+.</code></pre>
+<p>It’s a lot like writing a heredoc, except you must always terminate with a period (or full-stop). And once you are gone, your message is queued… and hopefully within seconds your email is delivered to the mailboxes you specified.</p>
+<p>That is, you can still quit now and nothing will send! But once you end the DATA command with that final period… we can only hope you entered your recipients correctly.</p></li>
+<li><p>Assuming you have entered DATA and the server responds with “Go ahead; tell me when it ends with a period on its own line.” Now, there are a couple more things we would otherwise need to dutifully prepare (namely the Date and Message-ID headers, which are both required headers), but I’ll cut us some slack. Here is the full thing, with a <em>bare minimum</em> header:</p>
+<pre><code>DATA
+&gt; 354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;
+From: &quot;Bucky Badger&quot; &lt;bbadger@cs.wisc.edu&gt;
+To: alice@example.org, bob@example.org
+MIME-Version: 1.0
+Content-Type: text/plain; charset=&quot;utf-8&quot;
+Content-Transfer-Encoding: 8bit
+Subject: Come up with your own!
+
+Write your own message here!  Something like:
+&quot;I am writing this email with my bare hands!
+No Outlook, no Gmail, not even a proper MUA...
+And no HTML!  This is plain text email talking!&quot;
+Unicode, non-Latin characters like 嗨 or 😈 OK.
+And once you are done, end with a period...
+.
+&gt; 250 2.0.0 Ok: queued as 0490060180</code></pre>
+<p>Change the From and To header however you like; it literally doesn’t matter. Do try to match the ones you entered in Step 3 though. (This is how <a href="https://en.wikipedia.org/wiki/Email_spoofing">email spoofing</a> happens, by the way; there is nothing “wrong” with forging these From/To headers. You’d really have to count on the sender being decent enough to not lie about who they are.)</p>
+<p>The three lines in the middle (from MIME to 8bit) are uh… magic. Don’t touch them for now. :) Essentially they’re there to tell the recipient on the other end</p>
+<ol type="1">
+<li>the following is text, not binary garbage (and I hope your terminal encodes characters in UTF-8, so I tell SMTP that too…) and (2) the following is not encoded a second time for transfer; treat everything I write exactly the way I type them. (The historical reason is, simply speaking, that SMTP ran on very limited technology. We can do this thanks to the 8BITMIME capability we saw earlier when greeting the server; in the past, SMTP simply cannot handle non-ASCII characters, and CTE was invented to precisely get around that.)</li>
+</ol>
+<p>The blank line between the headers and body is <em>crucial</em>. Just… don’t forget it, and you’ll be fine for the most part.</p></li>
+<li><p>Don’t forget to thank the server and say goodbye to it:</p>
+<pre><code>THANK YOU
+&gt; 502 5.5.2 Error: command not recognized
+QUIT
+&gt; 221 2.0.0 Bye</code></pre>
+<p>Okay… that might not be a command, so don’t really type that. Still, we can show some gratitude internally though. After all, it sent a whole email for you!</p></li>
+</ol>
+<h2 id="openssl-s_client">Sending email elsewhere (openssl s_client)<a class="anchorlink" href="#openssl-s_client"></a></h2>
+<p>If you are not near a CSL machine, don’t worry — you can still send emails through an Internet-facing SMTP server. Though there will be two additional steps:</p>
+<ul>
+<li><p>Instead of <code>telnet localhost 25</code>, we’d have to connect over TLS. Luckily, openssl-s_client(1) is just the right tool for us!</p>
+<pre><code>$ openssl s_client -nocommands -quiet -crlf -starttls smtp -connect smtp-auth.cs.wisc.edu:587
+&gt; Connecting to 128.105.6.3
+&gt; depth=2 C=US, ST=New Jersey, L=Jersey City, O=The USERTRUST Network, CN=USERTrust RSA Certification Authority
+&gt; verify return:1
+&gt; depth=1 C=US, O=Internet2, CN=InCommon RSA Server CA 2
+&gt; verify return:1
+&gt; depth=0 C=US, ST=Wisconsin, O=University of Wisconsin-Madison, CN=cs.wisc.edu
+&gt; verify return:1
+&gt; 250 CHUNKING
+EHLO localhost
+&gt; 250-smtp-auth-01.cs.wisc.edu
+&gt; 250-PIPELINING
+&gt; 250-SIZE 24576000
+&gt; 250-VRFY
+&gt; 250-ETRN
+&gt; 250-AUTH PLAIN LOGIN
+&gt; 250-AUTH=PLAIN LOGIN
+&gt; 250-ENHANCEDSTATUSCODES
+&gt; 250-8BITMIME
+&gt; 250-DSN
+&gt; 250 CHUNKING</code></pre>
+<p>And now we are connected just like before.</p></li>
+<li><p>Though… we still have a bit of work to do. We need to authenticate with SASL. Note that the mail server responded back with “AUTH PLAIN LOGIN”. We’ll use the <a href="https://datatracker.ietf.org/doc/html/rfc4616#section-2">PLAIN</a> mechanism. Now is a good time to open another terminal, or temporarily suspend this process using Ctrl-Z. Because we need to manually encode the credentials.</p>
+<p>We’ll need two things: the username and password, as you would expect. According to <a href="https://csl.cs.wisc.edu/docs/csl/gmail-for-email/">this guide</a>, the username is your bare CSL username (without at-sign or the domain!) and the password is the email token you must request <a href="https://apps.cs.wisc.edu/accountapp/email-token">here</a>.</p>
+<p>Let’s assume your username is bbadger and your token is 123456789ABCDEFGHIJ. Then this would be your credentials:</p>
+<pre><code>$ printf &#39;\0%s\0%s&#39; bbadger 123456789ABCDEFGHIJ | base64
+AGJiYWRnZXIAMTIzNDU2Nzg5QUJDREVGR0hJSg==</code></pre>
+<p>which you should be able to use to authenticate with AUTH PLAIN:</p>
+<pre><code>AUTH PLAIN
+&gt; 334
+AGJiYWRnZXIAMTIzNDU2Nzg5QUJDREVGR0hJSg==
+&gt; 235 2.7.0 Authentication successful</code></pre>
+<p>I am guessing that AUTH LOGIN would work the same way; I’m not too sure what the difference is but I usually stick to AUTH PLAIN.</p></li>
+</ul>
+<p>Now you can continue with the same thing!</p>
+<h2 id="net-smtp">Bonus: Net::SMTP!<a class="anchorlink" href="#net-smtp"></a></h2>
+<p>If you are wondering how <em>I</em> send emails, well do I have a story to tell you. You see, there was a time when <code>openssl s_client</code> was the only thing I could reliably send emails in a “raw” way. It’s the exact same process I showed you above, except I would copy my pre-written email with <code>pbpaste</code> at the DATA step.</p>
+<p>Python’s smtplib wasn’t satisfactory to me (for reasons I don’t fully understand and am probably not justified to say), and even though I had re-written the algorithm for encoding quoted-printable CTE in Python… the lack of an SMTP client was still jarringly problematic.</p>
+<p>And of course: as tempting as it sounds to write a Tcl expect script to interact with SMTP, there are way too many states to handle. Like what if the connection times out? What if my password didn’t work? What if the server freaks out, and returns some code other than OK? There was no way I was going to write an SMTP client from scratch <em>just</em> to automate this.</p>
+<p>(Actually, there was something else I forgot to mention: Martin Lambers’ <a href="https://en.wikipedia.org/wiki/Msmtp">msmtp</a>. I have trouble remembering the arguments, but that wasn’t a real problem. I guess I just enjoy getting to the protocol level more; msmtp(1) is pretty great, actually! (For those of you who don’t know, think of msmtp(1) as a drop-in replacement for sendmail(8). For those of you who don’t know sendmail(8), uh…. don’t worry about it. Just treat msmtp as its own thing I guess :))</p>
+<p>But I was willing to revisit an old language known for its I/O capabilities… and ooh boy did I fall in love with it.</p>
+<p>Here’s what my current directory structure looks like.</p>
+<pre><code>.
+├── append_index.py -&gt; ../../../2024/10/24/append_index.py
+├── compose.pl      -&gt; ../../../2025/03/23/compose.pl
+├── create_index.py -&gt; ../../../2024/10/24/create_index.py
+├── queue.pl        -&gt; ../../../2025/03/23/queue.pl
+├── sendmail.sh     -&gt; ../../../2025/03/23/sendmail.sh
+├── test
+├── test.conf
+└── test.d
+    ├── date
+    ├── mid
+    └── text</code></pre>
+<p>The culmination is this <code>sendmail.sh</code> script:</p>
+<pre><code>$ cat sendmail.sh
+#!/bin/sh
+set -e
+if [ $# -ne 1 ]
+then
+    echo &quot;usage: $0 name&quot; &gt;&amp;2
+    exit 1
+fi
+name=$1
+shift
+./compose.pl &quot;$name&quot;
+for cp in &quot;$name.d&quot;/compose/*; do
+    if [ -x &quot;$cp&quot; ]; then
+        &quot;$cp&quot; &quot;$name&quot;
+    fi
+done
+compose.py -y &quot;$name.conf&quot; -o &quot;$name&quot;
+b=&quot;$(wc -c &quot;$name&quot; | awk &#39;{print $1}&#39;)&quot;
+echo &quot;Composed $b byte$([ &quot;$b&quot; -eq 1 ] || echo s) in &#39;$name&#39;&quot;
+printf &quot;Would you to preview? (y/[n]) &quot; ; read -r ans
+if [ &quot;$ans&quot; = y ] || [ &quot;$ans&quot; = Y ]; then
+    if vim +&#39;set filetype=mail&#39; -R &quot;$name&quot;; then
+        :
+    else
+        ret=$?
+        echo &quot;Abort! Vim exited with code $ret&quot; &gt;&amp;2
+        exit $ret
+    fi
+fi
+exec ./queue.pl &quot;$name&quot;</code></pre>
+<p>… which you can see is very short, but calls a lot of other things. It starts at compose.pl, which generates time-specific RFC headers (namely Date and Message-ID):</p>
+<pre><code>$ cat compose.pl
+#!/usr/bin/env perl
+use v5.36;
+use autodie qw(:all);
+
+use POSIX qw(locale_h);
+use File::Spec;
+
+my $name = shift;
+my $time = time;
+
+defined $name   or die &quot;usage: $0 name\n&quot;;
+-d &quot;$name.d&quot;    or die &quot;missing $name.d; stopped&quot;;
+-r &quot;$name.conf&quot; or die &quot;missing $name.conf; stopped&quot;;
+
+sub the {
+    my ($file) = @_;
+    File::Spec-&gt;catfile(&quot;$name.d&quot;, $file);
+}
+
+sub gets {
+    my ($file) = @_;
+    open my $fh, &#39;&lt;&#39;, $file;
+    my $text = do { local $/; &lt;$fh&gt;; };
+    close $fh;
+    $text;
+}
+
+sub puts {
+    my ($text, $file) = @_;
+    open my $fh, &#39;&gt;&#39;, $file;
+    print $fh $text;
+    close $fh;
+    print &quot;Wrote &#39;$text&#39; to &#39;$file&#39;\n&quot;;
+    $text;
+}
+
+sub now {
+    setlocale(LC_TIME, &quot;C&quot;);
+    POSIX::strftime(&quot;%a, %d %b %Y %H:%M:%S %z&quot;, localtime $time);
+}
+
+sub mid {
+    my @CHARS = (&#39;A&#39;..&#39;F&#39;, &#39;a&#39;..&#39;f&#39;, &#39;0&#39;..&#39;9&#39;);
+    my $noise = join &#39;&#39;, map {; $CHARS[rand @CHARS] } (0 .. 12);
+    my $epoch = POSIX::strftime(&quot;%s&quot;, localtime $time);
+    my $procid = $$;
+
+    my $hostname = -r the (&#39;host&#39;)
+        ? gets the (&#39;host&#39;)
+        : &#39;e.rapidcow.org&#39;;
+    my $lcpart = join &#39;.&#39;, $epoch, $procid, $noise;
+    &quot;&lt;${lcpart}\@${hostname}&gt;&quot;;
+}
+
+puts now, the &#39;date&#39;;
+puts mid, the &#39;mid&#39;;
+
+# (Don&#39;t worry about these for now; these are my attempt to
+# cooperate with a &quot;special&quot; nonstandard header that Microsoft
+# Outlook invented called Thread-Index.  Don&#39;t be like Microsoft.
+# Just use References/In-Reply-To like normal mail clients do.)
+if (-x &#39;append_index.py&#39; &amp;&amp; -f (the &#39;base&#39;) &amp;&amp; -f (the &#39;since&#39;)) {
+    my $base = gets the &#39;base&#39;;
+    my $since = gets the &#39;since&#39;;
+    my $delta = $time - $since;
+    $delta &gt;= 0 or die &quot;Time traveler&quot;;
+    my $rando = int rand 0x100;
+    print STDERR &quot;./append_index.py $base $delta $rando\n&quot;;
+    puts `./append_index.py &quot;$base&quot; &quot;$delta&quot; &quot;$rando&quot;` =&gt; the &#39;index&#39;;
+} elsif (-x &#39;create_index.py&#39;) {
+    print STDERR &quot;./create_index.py $time\n&quot;;
+    puts `./create_index.py &quot;$time&quot;` =&gt; the &#39;index&#39;;
+}</code></pre>
+<p>(The code for generating Date and Message-ID are actually taken from two places: <a href="https://stackoverflow.com/a/40149475/19411800">here</a> and <a href="https://www.perlmonks.org/?node_id=1190527;showspoiler=1190529-1">here</a> (which in turn was derived from <a href="https://metacpan.org/pod/Email::MessageID">Email::MessageID</a>. Crazy!))</p>
+<p>Then it continues to compose.py, which is a very large Python file (~1000 lines) that uses the built-in email library and my QP encoder to generate an email message from a config file. The config file… looks a bit deranged:</p>
+<pre><code>$ cat test.conf
+headers
+  Date: &lt; test.d/date
+  Message-ID: &lt; test.d/mid
+  From: test &lt;emeng@cs.wisc.edu&gt;
+  To: &lt;victim@rapidcow.org&gt;
+  Subject: Hello :)
+content
+  text/plain &lt; test.d/text
+    with charset us-ascii
+    of encoding 7bit
+      where treol = please!</code></pre>
+<p>(I am not even kidding, “please!” is a boolean.)</p>
+<p>But you can see that it reads from the date/MID files generated by compose.pl (they cooperate very well, that is!) And the syntax looks eeriely similar to the actual output:</p>
+<pre><code>$ cat test
+Date: Thu, 27 Mar 2025 23:35:35 -0500
+Message-ID: &lt;1743136535.66565.9D90e0De9bEfA@e.rapidcow.org&gt;
+From: test &lt;emeng@cs.wisc.edu&gt;
+To: &lt;victim@rapidcow.org&gt;
+Subject: Hello :)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=&quot;us-ascii&quot;
+Content-Transfer-Encoding: 7bit
+
+hi i am good and this is TesT
+
+Mewheheheee.... &gt;:))))
+-evil</code></pre>
+<p>Of course, with the last three lines being the same “magic” MIME lines I had us include at the beginning.</p>
+<p>Next would be a confirmation followed by a preview; I use Vim because it has this nice “mail” syntax highlighting. Also, when you quit Vim with <code>:cq</code>, it sets the error status; so if I’m in the middle of this and I realized I made a typo in my email, I can use that to abort the script and fix my typo.</p>
+<p>But if I’m fine with that Vim exits normally, the script hands off to queue.pl… and this is the part I want to show you: because it is precisely what we just did – but in Perl.</p>
+<p>Now, okay, admittedly there is a little more going on in this queue.pl: namely it extracts the addresses of the recipient (To, Cc, Bcc) and deletes the Bcc header. But the heart of queue.pl is still the sending part: and that is all thanks to the Net::SMTP package.</p>
+<p>You can translate what we did with word by word!</p>
+<ol type="1">
+<li><p>When we typed <code>telnet localhost 25</code>, this translates to:</p>
+<pre><code>my $smtp = Net::SMTP-&gt;new(&#39;localhost&#39;, Port =&gt; 25);</code></pre>
+<p>When we typed <code>openssl s_client -nocommands -quiet -crlf -starttls smtp -connect smtp-auth.cs.wisc.edu:587</code>, that translates to:</p>
+<pre><code>my $smtp = Net::SMTP-&gt;new(&#39;smtp-auth.cs.wisc.edu&#39;, Port =&gt; 587);
+$smtp-&gt;starttls();</code></pre>
+<p>It is quite hard to overstate how simple the interface Net::SMTP provides is. (Installing can be quite the challenge, but I haven’t found too much trouble installing IO::Socket::SSL and Net::SSLesy. There will be a complete, working script at the end that you can try.)</p></li>
+<li><p>EHLO would have been done by Net::SMTP at the new call/starttls(), I think? I haven’t been able to figure this part out much. I guess this is where the author(s) of Net::SMTP decided that they would abstract away details of the protocol.</p></li>
+<li><p>You authenticate by creating an Authen::SASL ref:</p>
+<pre><code>my $sasl = Authen::SASL-&gt;new (
+    mechanism =&gt; &#39;PLAIN&#39;,
+    callback =&gt; {
+        user =&gt; &#39;bbadger&#39;,
+        pass =&gt; &#39;123456789ABCDEFGHIJ&#39;,
+    },
+)
+$smtp-&gt;auth($sasl);</code></pre>
+<p>There is also a shortcut? Though I’m not sure what mechanism it would use in this case exactly. (It might try all of them one at a time.)</p>
+<pre><code>$smtp-&gt;auth(&#39;bbadger&#39;, &#39;123456789ABCDEFGHIJ&#39;);</code></pre>
+<p>Then to do the MAIL and RCPT verbs you use mail() and recipient() methods:</p>
+<pre><code>$smtp-&gt;mail(&#39;bbadger@cs.wisc.edu&#39;, Bits =&gt; 8);
+$smtp-&gt;recipient(&#39;alice@example.org&#39;, &#39;bob@example.org&#39;);</code></pre></li>
+<li><p>Now for the best part(s): sending the actual email. Probably my favorite part of Net::SMTP’s interface (second only to its support for the 8BITMIME which I just discovered while re-writing queue.pl for this) is how it lets you send the message line by line: just like how it was done on the terminal (and – dare I say – the old days of SMTP…)</p>
+<pre><code>$smtp-&gt;data();
+$smtp-&gt;datasend(&quot;&lt;line 1&gt;\n&quot;);
+$smtp-&gt;datasend(&quot;&lt;line 2&gt;\n&quot;);
+...;
+$smtp-&gt;datasend(&quot;&lt;line n&gt;\n&quot;);
+$smtp-&gt;dataend();</code></pre>
+<p>This corresponds directly to:</p>
+<pre><code>DATA
+&lt;line 1&gt;
+&lt;line 2&gt;
+...
+&lt;line n&gt;
+.</code></pre>
+<p>except with the benefit that if any of these lines happen to also be a lone period, datasend() adds a period in front to sort of “escape” it I guess. (I’m not sure how that’s supposed to work, but you can read the docs/code of Net::Cmd, which is the part that implements this data-transmission protocol.)</p></li>
+<li><p>Now to close the connection we just call quit:</p>
+<pre><code>$smtp-&gt;quit();</code></pre>
+<p>Actually, the mail already gets sent by the time you hit dataend(). I just thought we’d be polite and tell the server that we’re done here before hanging up abruptly.</p></li>
+</ol>
+<p>And now you know how to send email with Net::SMTP as well :) Or it can feel like that… the actual details are a bit gritty.</p>
+<p>Lucky you, I’ve been through the gritty details, and as I said, I
+rewrote the actual queue.pl I have here so that <em>you</em> can use it
+too! <a
+href="https://gist.github.com/eyzmeng/f37a6cf305b6f30a3854dc66538d7847#file-queue-pl">Here</a>.
+Read the comments. Go crazy! (though not crazy in the sense of spamming,
+of course.) <a href="mailto:emeng&#64;cs.wisc.edu">Send me a mail</a>!</p>
+<p>And when people are comfortable, we can look at XOAUTH2 (so we can
+also send through Microsoft), and perhaps Mutt next… But this should be
+enough for now. :)</p>
+</body>
+</html>
