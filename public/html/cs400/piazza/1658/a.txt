@@ -1,5 +1,4 @@
-// The fixed DOT grammar.
-// (You missed a double quote; didn't you? ;)
+// The example with fixed DOT grammar... i think
 digraph {
     ""EWQrqwr qwer qw"cqewr" -> "eqr""reqwecxwq<Rq.r13" [time=0.114514];
 }
