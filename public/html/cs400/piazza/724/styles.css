@@ -1,0 +1,58 @@
+/* Element name selector */
+
+html 
+{
+	margin: 3em;
+	font-size: 15pt;
+	color-scheme: dark light;
+}
+html, code
+{
+	font-family: Consolas, Courier, monospace;
+}
+code {
+	font-weight: 700;
+}
+h1, h2 {
+	position: relative;
+}
+body {
+	text-wrap: balance;
+}
+
+/* Colors for dark users; light users don't deserve colors. */
+@media (prefers-color-scheme: dark) {
+	html { background-color: #222; }
+	body { color: #ddd; }
+	code, h1, h2 { color: #fff; }
+}
+
+/* Class selector */
+
+.anchorlink
+{
+	text-decoration: none;
+	position: absolute;
+	top: 0; left: -1em;
+	color: #a8a8a8;
+	min-width: 1em;
+	min-height: 100%;
+}
+.anchorlink:hover:after
+{
+	content: "#";
+}
+
+/* ID selector */
+
+#title, #subtitle
+{
+	display: block;
+	text-align: center;
+}
+
+#title:has(+ #subtitle), #title + #subtitle
+{
+	margin-top: 0;
+	margin-bottom: 1rem;
+}

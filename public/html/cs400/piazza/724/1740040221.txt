@@ -1,0 +1,64 @@
+now that you've already pushed to GitLab, aw.... :(
+
+just to let you know, you could have done a rebase of 28b1dd4 and 231fae7 using:
+
+git rebase --onto main mrbranch~2 mrbranch
+git rebase --onto main 6a10acd 231fae7
+# Your will be checked out at `main' after you run this.
+# So you can `git push', `git push origin HEAD', or
+# `git push origin HEAD:main', `git push origin main:main',
+# `git push origin +refs/heads/main:refs/heads/main', etc.
+# (Depends on how you feel I guess.)
+
+(of course, don't run it now---you have already merged main, so...)
+
+that way your history will be linear and... just nicer, in my opinion.
+(a merge isn't really that bad though, git log ignores the commit graph
+and lists commits in reverse chronological order anyways).
+that said, since you ran `cs300 submit' and thus by then it already
+pushed the submission to GitLab, you can't do much better than:
+
+       NEW#2 <-+ PUSH
+         |     :                          MERGE   <----+ PUSH
+       NEW#1   :                       /         \     :
+         |     :           OR          |         |     :
+      SUBMIT (main)                    |      SUBMIT (main)
+         |                (mrbranch) NEW#2       |
+       OLD#2                           |       OLD#2
+         |                           NEW#1       |
+       OLD#1                           |       OLD#1
+         |                             \         /
+     (restart)                          (restart)
+
+    new history                        new history
+   based on main                     merged with main
+  (my suggestion)                  (your current state)
+
+because the main branch is **protected** on GitLab and so,
+any update you make to it can only include more commits, not less.
+And since GitLab already *has* your submission commit, it will
+*always* contain that submission no matter what you do.
+If you want to be able to remove your old commits, push to
+something that *isn't* protected.  For example, I would do
+`git push origin HEAD:devel' (devel can be any branch name
+you like *except* main) and open GitLab to see if I am
+satisfied with my commits.  If I am not, I can restart,
+repeat the same thing (like what you did with your `mrbranch'),
+then i can `git push --force origin HEAD:devel' which
+essentially deletes my old commits (well, almost---we are
+not given the control of the GitLab garbage collector.
+but good enough for me. :)  Once I am happy, I can *then*
+decide to push to the main branch by swapping that `devel' out
+and putting `main` in there instead.
+(Of course, I would remember clean up after myself using
+`git push origin :devel'.)
+
+according to @711 though, they will only grade the most recent
+commits; so you should be fine (but well, of course, if it
+weren't fine, it's not like there is anything you can do to
+delete the old commits...)
+
+=END=
+
+P.S. not a part of the answer, but i personally think grading
+based on a git repository is kind of a joke.

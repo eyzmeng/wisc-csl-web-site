@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<!-- I don't trust the web server. -->
+	<meta http-equiv="Content-Type" content="text/html; charset='utf-8'">
+	<meta name="author" content="Ethan Meng">
+	<meta name="description" content="Argument against merging everything">
+	<link type="text/css" rel="stylesheet" href="styles.css"
+	crossorigin="anonymous">
+	<link name="canonical" content="https://pages.cs.wisc.edu/~emeng/cs400/piazza/724/">
+</head>
+<body>
+	<h1 id="title">Merge and Rebase</h1>
+	<h3 id="subtitle">Piazza @724</h3><hr>
+
+	<p>This is a rewrite of an answer I wrote for <a rel="noopener" href="https://piazza.com/class/m5x25kjamnl2rk/post/724">Piazza @724</a>.
+	A plain text version is reproduced <a rel="noopener" href="https://pages.cs.wisc.edu/~emeng/cs400/piazza/724/1740040221.txt">here</a> (with typos reproduced verbatim).</p>
+
+	<h2 id="statement">Unsurprising Predicament<a href="#statement" class="anchorlink"></a></h2>
+
+	<p>
+	Another day of <code>cs400 submit</code> causing mayhem with its
+	reckless <code>git pull --no-edit</code>, creating ugly commit
+	histories *with* its already heinous commit messages.
+	</p>
+
+	<p>
+	Git makes branching cheap, but that does not mean branching is always
+	the good idea -- or even make it the right one, so to speak.
+	</p>
+
+	<!--
+		Write alt text for screenreaders and terminal browsers;
+		Images are too high-tech.
+	-->
+	<figure>
+		<img alt="Two strategies for combining diverging histories, labeled old for upstream history and new for local history. On the left, the rebase strategy is employed to replay the new commits on top of the old ones; the combined history is clean and linear. On the left, the merge strategy is employed to create a merge commit, one whose parent points to both HEAD of local history and HEAD of remote history."
+		src="compar.png">
+	</figure>
+
+	<h3>Merge</h3>
+
+	<p>The ugly right half of the diagram above.</p>
+
+	<ul>
+		<li>The good thing about this strategy is that it preserves
+		the commit metadata, most prominently the commit hash, of both
+		HEADs, new (the <code>submit</code> commit) and old (the
+		<code>NEW#2</code> commit).  The question now is who in the
+		world it preserves the old HEAD for, and the answer is absolutely
+		no one, other than the short life span it existed
+		*exclusively* on the author's local repository.</li>
+		<li>The commit graph is nonlinear, though one may rightfully
+		argue is necessary due of the distributed nature of Git as a
+		version control system.  The catch, again, is that this is not
+		always desirable.  Particularly when Git is used to track the
+		development history authored by a single person merging is
+		almost always undesirable.</li>
+		<li>It is, admittedly, harder to mess up a merge than a rebase.
+		But I say this is just the reluctance to assume adequate
+		responsibility to learn to do things the right way.
+		(In other words, skill issue; it's about time people learn to use
+		<code>git reset --hard ORIG_HEAD</code> and
+		<code>git log --oneline --graph</code>.)</li>
+	</ul>
+
+	<h3>Rebase</h3>
+
+	<p>The based left half of the diagram above. (Pun intended.)</p>
+
+	<ul>
+		<li>The bad thing is that commit metadata is rewritten on the side
+		that gets rebased.  In the example, this means if the HEAD of the
+		new history <code>NEW#2</code> were pushed elsewhere, it would not
+		be happy to see that this new history contradicts its knowledge of
+		the old <code>NEW#2</code>  (With Git jargon this is to say that
+		such a push is non-<a target="_blank" rel="noopener" href="https://git-scm.com/docs/gitglossary#Documentation/gitglossary.txt-aiddeffastforwardafast-forward">fast-forward</a>able.
+		pushing this rebased history.  This, as I have discussed, is an
+		unrealistic scenario; local development stays local, and there
+		should absolutely be zero harm in discarding something that is
+		*in nature* a work-in-progress.</li>
+		<li>The commit graph is linear.  A boring linked list; but
+		that's <a target="_blank" rel="noopener" href="https://mcfunley.com/choose-boring-technology">what technology *should* be</a>.   This point should be
+		self-explanatory.</li>
+		<li>Rebasing *is* harder.  But if you do it right, it can be
+		as simple as <code>git rebase origin/master</code> (or
+		<a target="_blank" rel="noopener"
+		href="https://lore.kernel.org/git/20200504231034.GA34485@gmail.com/"
+		target="There was a time when Git was hard-coded to assume master to be the default branch (git init does it). Moving Git away from relying on hard-coded mechanism is a good thing (see &lt;pull.656.v4.git.1593009996.gitgitgadget@gmail.com/&gt;), but the attempt to overturn a 15+-year-long convention is poorly motivated and, dare I say, ill-justified."
+		>whatever they call the default branch these days</a>).
+		With <strong>git-pull</strong>(1), it can look like
+		<code>git pull --rebase origin master</code>, which looks
+		like a lot to type, but <a target="_blank" rel="noopener"
+		href="https://stackoverflow.com/a/62653400">you'd have to
+		do the same to with <code>--no-ff</code> to merge anyways</a>
+		(if we can all stop ignoring that the devious
+		<code>cs400 init</code> tramples over your user config
+		and forcifully sets <strong>pull.rebase</strong> to
+		<strong>true</strong>).</li>
+	</ul>
+
+	<h2 id="scope">Scope of this discussion<a href="#scope" class="anchorlink"></a></h2>
+
+	<p>Note that I am not talking about merge/rebase workflow in a
+	*collaborative* environment; that opens a whole wormhole of problems,
+	ones that are oftentimes
+	<a target="_blank" rel="noopener"
+	href="https://research.swtch.com/xz-timeline">overwhelmingly social</a>.
+	I only focus on Git when used by one person.</p>
+</body>
+</html>
