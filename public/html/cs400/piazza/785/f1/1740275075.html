@@ -1,0 +1,65 @@
+<p>I think copying is (or at least should be) totally not off-limits
+(how could they tell lol) but in case you want to do it in a more direct
+way, there is <a
+href="https://git-scm.com/docs/git-show"><code>git-show(1)</code></a> or
+<a
+href="https://git-scm.com/docs/git-cat-file"><code>git-cat-file(1)</code></a>.
+Ordered from porcelain (high-level) to plumbing (low-level):</p>
+<pre><code>git show feature~1:riddles.txt
+git cat-file -p feature~1:riddles.txt
+git cat-file blob feature~1:riddles.txt
+# P.S. This last command is obviously a joke
+# (works only on loose objects, i.e. no pack files!)
+cat &quot;$(git rev-parse --git-dir)&quot;/objects/$(git rev-parse feature~1:riddles.txt | sed &#39;s!..!\0/!&#39;) | python -c &#39;import sys, zlib; sys.stdout.buffer.write(zlib.decompress(sys.stdin.buffer.read()))&#39; | perl -0777 -pe &#39;s/\Ablob \d+\0//&#39;</code></pre>
+<p>You can save this to a file (e.g. append
+<code>&gt; riddles.txt</code> to the end of any command), pipe it to
+your system clipboard (that's <a
+href="https://ss64.com/mac/pbcopy.html"><code>pbcopy</code></a> on Mac;
+on X11 there is <code>xclip</code>), or just... copy it---if you have a
+mouse that is. This isn't fundamentally different than
+<code>git log -p</code> or <code>git show &lt;commit&gt;</code>, but the
+benefit is you just get the file itself; you don't have to remove the
+<code>+</code> and <code>-</code> prefixes.</p>
+<p>Some other options (that probably lack the flexibility of saving to a
+different path; though it is possible to rename the
+<code>riddles.txt</code> you have before running any of this, e.g.
+<code>mv riddles.txt riddles.bak</code>):</p>
+<ul>
+<li><p>The extremely overloaded checkout</p>
+<pre><code>git checkout feature~1 -- riddles.txt</code></pre>
+<p>You can remove the <code>--</code> if Git doesn't complain.</p></li>
+<li><p>The new and shiny restore:</p>
+<pre><code>git restore -s feature~1 riddles.txt</code></pre></li>
+</ul>
+<p>I came up with this:</p>
+<pre><code>git reset --hard feature~1
+git reset @{1}</code></pre>
+<p>(don't laugh at me for using reset, it <em>does</em> work, however I
+am not responsible for your unstaged (worktree) <em>or</em> staged
+(index) changes if you run <code>reset --hard &lt;anything&gt;</code>
+without saving them :x and it should go without saying but I don't
+recommend this over any of the two commands above---even
+<code>checkout --force &lt;commit&gt; &lt;path&gt;</code> is far far
+safer than <code>reset --hard</code>.</p>
+<p>Actually, here is the same thing that does not move your ref (branch)
+at all. Let's say you are on the <code>feature</code> branch, and
+<code>git symbolic-ref HEAD</code> prints
+<code>refs/heads/feature</code>. Remember this name. Now detach HEAD and
+check out the commit where the previous riddle lives, using any of these
+commands (this should be familiar to people who completed A04 in the way
+they told you to):</p>
+<pre><code># if your worktree is dirty, any of these should complain to you.
+# that&#39;s part of what makes these safer than git reset --hard. :)
+git checkout feature~1
+git switch -d feature~1</code></pre>
+<p>then run this, using the name you (hopefully) remembered:</p>
+<pre><code>git symbolic-ref HEAD refs/heads/feature</code></pre>
+<p>I will <em>not</em> explain what this line means. :)</p>
+<p>There is <a href="https://stackoverflow.com/q/610208/19411800">a
+Stack Overflow question</a> titled "How to retrieve a single file from a
+specific revision in Git?" with a <a
+href="https://stackoverflow.com/a/610315/19411800">very nice and
+comprehensive answer</a>, if you ever bothered to look it up. I didn't
+look at this forum when writing this though, I was just having fun
+imagining different ways to do the same thing (maybe a bit too much fun,
+oh well.... XD)</p>
