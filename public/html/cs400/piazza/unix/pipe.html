@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Unix Pipeline resources</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Unix Pipeline resources</h1>
+</header>
+<p>Hey hey hey did someone mention <em>the</em> <a
+href="https://www.youtube.com/watch?v=bKzonnwoR2I">Unix
+<strong>pipe</strong>line<strong>s</strong></a>? You could use some…
+<em>resources</em>. :)</p>
+<p>P.S. Since you tagged “exam” I will definitely not be in the position
+to answer this; but that hasn’t stopped my urge to yap for the 100th++
+time! (On second though, I want this to be a wiki people can edit –
+append, modify, or otherwise delete entirely – so… I guess I am posting
+this as an answer. Sorry :)</p>
+<p>(Just don’t tell me you are actually asking about the bitwise OR
+operator in Java… I actually kind of want to collect good stuff about
+pipe and <a
+href="https://manpages.debian.org/bookworm/perl-doc/perlipc.1.en.html">IPC</a>)</p>
+<p>(Also fun fact: If you search for “pipes” in Piazza, 2/3 posts are
+mine doing just that. This will make it a fourth post… :D)</p>
+<p>#0 The manuals (highly technical, but… useful to remember that they
+exist.)</p>
+<ul>
+<li>GNU Bash <strong>bash</strong>(1): [<a
+href="https://manpages.debian.org/bookworm/bash/bash.1.en.html#Pipelines">man
+page</a>] [<a
+href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">info
+page</a>]</li>
+<li>The POSIX Bourne shell <strong>sh</strong>(1): [<a
+href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html#tag_19_09_02">POSIX.1-2024</a>]</li>
+</ul>
+<p>#1 Friendly guides (the ones that are most likely to help – in
+decreasing order of friendliness)</p>
+<ul>
+<li><a
+href="https://web.archive.org/web/20080318231951/http://www.cs.wisc.edu/csl/cs1000/node56.html">Advanced
+Topics &gt; Pipe</a>: <strong>from CS1000</strong>, a Unix manual that
+used to live <strong><a
+href="https://web.archive.org/web/20080602103734/http://www.cs.wisc.edu/csl/cs1000/cs1000.html">right
+here on CSL</a></strong>! (Retrieved via Internet Archive as the links
+now redirect to <a href="https://csl.cs.wisc.edu/">CSL docs</a> – I
+know. sadge. i am literally depressed rn csl better bring it back
+/j)</li>
+<li><a href="https://www.linfo.org/pipe.html">Pipes: A Brief
+Introduction</a>: from the <a
+href="https://www.linfo.org/index.html">Linux Info Project</a>. Includes
+a nice history lesson too.</li>
+<li><a href="https://tldp.org/LDP/abs/html/special-chars.html">Special
+characters</a> (search downward for “UNIX pipe”; unfortunately I can’t
+make a direct link there): you would be very delighted to hear about <a
+href="https://tldp.org/">The Linux Document Project</a> and how they
+have Bash programming tutorials (this one comes from <a
+href="https://tldp.org/LDP/abs/html/">Advanced Bash-Scripting Guide</a>;
+there is also <a
+href="https://tldp.org/LDP/Bash-Beginners-Guide/html/">Bash Guide for
+Beginners</a>)</li>
+<li><a
+href="https://mywiki.wooledge.org/BashProgramming#Commands_and_Quoting">BashProgramming
+&gt; Commands and Quoting</a>: explained in three brief sentences, but I
+thought it’d be <em>obligatory</em> that I include <a
+href="https://mywiki.wooledge.org/">Greycat’s Wiki</a>
+<em>somewhere</em>. There is <a
+href="https://mywiki.wooledge.org/BashFAQ/024">a very nice FAQ</a>
+<em>related</em> to pipe, for instance – namely the subtle fact that
+pipelines are executed in a subshell. Here are <a
+href="https://news.ycombinator.com/item?id=29747472">some
+complements</a> from people other than me to justify this
+inclusion.</li>
+<li>Watch Brian Kernighan (one the living legends from Bell Labs)
+explain!!! <a
+href="https://www.youtube.com/watch?v=tc4ROCJYbm0&amp;t=330">Here
+(AT&amp;T archives)</a> (and <a
+href="https://www.youtube.com/watch?v=bKzonnwoR2I">that first link</a>
+of this post is secretly a video too… (I will be infinitely grateful for
+Computerphile inviting him over for talks qvq))</li>
+<li><a href="https://www.grymoire.com/Unix/Bourne.html#uh-73">Bourne
+Shell Tutorial &gt; Simple Control Flow</a>: very well-paced from what I
+can tell; written by <a
+href="https://www.grymoire.com/About.html#Bruce_Barnett">Bruce
+Barnett</a>. I know him because I was looking for a C Shell tutorial and
+stumbled upon <a href="https://www.grymoire.com/Unix/Csh.html">this
+gold</a> (the prologue right after the TOC gave me good chuckles – ah…
+takes me back to the good old days when I looked into <span
+class="citation" data-cites="137">@137</span> and there weren’t two
+thousand Piazza posts :) And <a
+href="https://mywiki.wooledge.org/Idiot#SpaceBass_vs._greycat">greycat</a>
+helped me remember the web site – thanks greycat!</li>
+</ul>
+<p>#2.5 Some less directly useful, but more fun resources</p>
+<ul>
+<li><p><a href="https://stevens.netmeister.org/631/pp/">Pipe
+Practices</a>: I was today years old when I learned that a “<a
+href="https://punkx.org/unix-pipe-game/">UNIX Pipe Card Game</a>”
+exists. O_O (And <a
+href="https://news.ycombinator.com/item?id=41048894">oh</a>, <a
+href="https://punkx.org/4917/">oh man</a>, it gets so crazier… (And I
+thought <em>Computer Engineering for Babies</em> was crazy enough,
+wow…)</p></li>
+<li><p>Useless Use of Cat (UUOC): This is just something nice to know.
+(Plus you can learn from the examples!) [<a
+href="https://en.wikipedia.org/wiki/Cat_%28Unix%29#Useless_use_of_cat">wikipedia</a>]
+[<a href="https://www.shellcheck.net/wiki/SC2002">shellcheck
+SC2002</a>]</p></li>
+</ul>
+<p>#3 Advanced (For the adventurous warriors)</p>
+<p>Those of you who love C/Unix…. this is for you. (I am not aware of
+the size of the set of people who fit the criteria, but I know (as a
+matter of fact) its cardinality is strictly greater than 0 (I mean, me –
+I love C/Unix, is that not obvious enough? These are resources for
+<em>me</em> even if none of <em>you</em> will read them! Ha!
+&gt;:D))</p>
+<ul>
+<li><p><a href="https://news.ycombinator.com/item?id=22704774">“How are
+Unix Pipes implemented?” on HN</a> links to so many gems at once. But in
+<em>particular</em>… I like:</p>
+<ul>
+<li><a href="https://www.rozmichelle.com/pipes-forks-dups/">Pipes,
+Forks, &amp; Dups: Understanding Command Execution and Input/Output Data
+Flow</a> by <a href="https://www.rozmichelle.com/author/rozroz/">Roslyn
+McConnell</a> (very, very, <em>very</em> clean diagrams. I don’t think
+I’ve seen cleaner diagrams than this…)</li>
+<li><a href="https://news.ycombinator.com/item?id=22706876">This
+comment</a> on how Doug McIlory initially conceived the Unix pipeline
+seems interesting.</li>
+</ul></li>
+<li><p><a
+href="https://blogs.gnome.org/alexl/2012/08/10/rethinking-the-shell-pipeline/">Rethinking
+the shell pipeline</a> (and <a
+href="https://news.ycombinator.com/item?id=4368993">related HN
+thread</a>): for those of you who use Windows, this is for you – because
+this is precisely what <strong>Powershell</strong> is about! Most
+specifically, its <a
+href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pipelines?view=powershell-7.5">“Objected-oriented”
+approach to pipelines</a>, rather than the text/bytestream/file-based
+interface in Unix. I don’t want to give you my opinion or tell you what
+to think; but there are some good arguments for and against this modern
+re-thinking of shell pipelines both in the blog comments and in HN. (If
+you want to dig an even deeper hole than I did, I heard that the
+designer of Powershell wrote this thing called <a
+href="https://www.jsnover.com/blog/2011/10/01/monad-manifesto/">Monad
+Manifesto</a>…)</p></li>
+<li><p><a
+href="https://www.youtube.com/watch?v=mq5G33Sbc_o&amp;list=PL0qfF8MrJ-jxMfirAdxDs9zIiBg2Wug0z&amp;index=51">Pipes
+and FIFOs</a>: this is just raw C programming. Here he talks about <a
+href="https://man.netbsd.org/pipe.2"><strong>pipe</strong>(2)</a> and <a
+href="https://man.netbsd.org/mkfifo.2"><strong>mkfifo</strong>(2)</a>.
+(You know things are serious from the <a
+href="https://web.archive.org/web/20080604003140/http://www.cs.wisc.edu/csl/cs1000/node51.html">man
+page section</a> alone: it’s not a command in section 1 (commands), not
+a function in section 3 (library subroutines), but a function in
+<strong>section 2</strong> (<em>system calls</em>) – as close as it gets
+to the OS itself!)</p>
+<p>A note to people who plan to read the man pages in their terminal:
+you will need to specify the man page section for mkfifo because there
+is a synonymous page in section 1 (for the <a
+href="https://man.netbsd.org/mkfifo.1"><strong>mkfifo</strong>(1)</a>
+<em>command</em>). So instead of this: <code>man mkfifo</code>, run
+this: <code>man 2 mkfifo</code>, or this:
+<code>man -S 2 mkfifo</code>.</p></li>
+<li><p>Since nothing is off-limits, I can selfishly direct you to read
+the abomination I assembled with <strong>sort</strong>(1) |
+<strong>head</strong>(1) | <a
+href="https://man.archlinux.org/man/column.1.en.txt"><strong>column</strong>(1)</a>
+| <strong>sed</strong>(1) in <span class="citation"
+data-cites="724_f1">@724_f1</span>. One thing I should add: I wouldn’t
+use <code>cat -n</code> anymore because <a
+href="https://news.ycombinator.com/item?id=22474362"><strong>cat</strong>(1)
+does too many things</a>. But the awk alternative
+<code>awk '{print NR "\t" $0}'</code> Rob Pike and Brian Kernighan
+mention in the essay “<a
+href="https://harmful.cat-v.org/cat-v/unix_prog_design.pdf">Program
+Design in the UNIX Environment</a>” isn’t much prettier IMO. So imagine
+my delight when I <a
+href="https://www.youtube.com/watch?v=8qPxQ3g8bso&amp;t=165s">discovered</a>
+that <strong>nl</strong>(1) exists (both on <a
+href="https://man.archlinux.org/man/nl.1.en.txt">Linux</a> and on <a
+href="https://man.freebsd.org/cgi/man.cgi?query=nl&amp;apropos=0&amp;sektion=1&amp;manpath=FreeBSD+15.0-CURRENT&amp;arch=default&amp;format=html">BSD</a>.
+So now I use <code>nl -b a</code> (sometimes I squeeze the flag and
+option, but I’m not sure how portable this form is: <code>nl -ba</code>)
+and never look back. (yippee! ^^)</p></li>
+</ul>
+<p>P.S. I am hosting a copy on <a
+href="https://pages.cs.wisc.edu/~emeng/cs400/piazza/unix/pipes.html">my
+CSL page</a>, in case you want something nicer to look at.</p>
+</body>
+</html>
