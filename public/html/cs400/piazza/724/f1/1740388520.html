@@ -1,0 +1,59 @@
+<p>thanks Jay!!! I'm a big fan of your (and Rohan's too) answers (in
+fact you are, i think, the first person to name a <a
+href="https://github.com/git/git/blob/v2.48.1/command-list.txt#L126">plumbing
+command</a> here.) your answers are some of the biggest inspirations for
+me to continue writing piazza answers <del>even when virtually nobody
+reads them lmao</del>....</p>
+<p>fun fact: when people didn't talk to me about what i write in cs300
+last semester, i like to count the number of words across all my answers
+to get some personal satisfaction. this post i wrote for example sits
+comfortably at top ten:</p>
+<pre><code># of course, when i am showing you this list, i
+# am sort of intending you to, uh... read them.
+# i am... actually quite proud of writing them.
+$ for f in $(find [0-9]* -type f -name &#39;[0-9]*.md&#39; -o -name &#39;[0-9]*.txt&#39;); do printf &#39;%s %s\n&#39; $(wc -w $f | awk &#39;{print $1}&#39;) $f; done | sort -rnk 1 | head -10 | column -t | cat -n | sed 2d\;6d\;9d
+     1  802  832/1740375987.md
+     3  601  815/f1/1740302309.md
+     4  601  702/1739958294.md
+     5  590  798/f1/1740296751.md
+     7  504  785/f1/1740275075.md
+     8  488  745/f1/1740086814.md
+    10  431  724/1740040221.md</code></pre>
+<p>(I did the same thing with byte count and <span class="citation"
+data-cites="724">@724</span> still came in 10th place, which is...
+something. (actually, this is completely wrong, since i was not
+accounting for multiple revisions. so it counted <span class="citation"
+data-cites="832">@832</span> twice, or otherwise this post would have
+been in the 9th place. but ugh... i don't care enough to correct that.
+(read: i can't think of a way to do that in a one-liner)))</p>
+<p>and oh yeah, this was totally going to be just a show-off (sorry, i
+am a bit egotistical when it comes to stuff i am good at X) that's what
+the ability to stay anonymous does to you i guess lol) but i'm still
+gonna show the statistics and central tendency to satisfy my obsessive
+mathy mind:</p>
+<pre><code>$ count () { for f in $(find [0-9]* -type f -name [0-9]*.md -o -name [0-9]*.txt); do wc -w $f | awk \{print\$1\}; done }
+$ count | python3 -c &#39;import sys; from statistics import median, mean, stdev; d=list(map(int, sys.stdin)); print(len(d),median(d),mean(d),round(stdev(d),2),sep=&quot;,&quot;)&#39;
+40,212.0,265.05,208.04
+$ alias histw=&#39;count | perl -e &#39;&quot;&#39;&quot;&#39;chomp(@d=&lt;STDIN&gt;); $N=shift; while (@d=grep{$i&lt;=$_}@d) { printf &quot;%3d %s\n&quot;, $i, &quot;=&quot; x grep{$_&lt;$i+$N}@d; } continue { $i+=$N }&#39;&quot;&#39;&quot;
+$ histw 120
+  0 =============
+120 ========
+240 ========
+360 ===
+480 ====
+600 ===
+720 =</code></pre>
+<p>so my posts are clearly right-skewed... though not as right-skewed as
+it was for cs300..... sorry i got too carried away writing this. thanks
+for the compliment anyways! ^^</p>
+<p>(still, if you allow me to be self-indulgent for one last moment, my
+favorite answer i've written here has to be the pipeline in <span
+class="citation" data-cites="785_f1">@785_f1</span> (that is the 7th
+longest post of mine)---it certainly is nasty that i have to read the
+whole buffer <em>twice</em>, but as a one-liner i can't complain... i
+had tons of fun assembling that pipeline (i sort of cheated with the
+zlib decoding because Python's is very much a batteries-included
+language but we don't talk about that XD), and to see it actually work
+is an amazing feeling you can't get from reading other people's code. :)
+(not by reading the cs400 script at least (<del><em>cough cough</em>
+git... <em>cough</em> pull... <em>cough</em> why.......</del>))</p>

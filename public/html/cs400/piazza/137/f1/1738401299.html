@@ -1,0 +1,29 @@
+<p>re: tcsh thinks the <code>/</code> following the colon in</p>
+<pre><code>echo &quot;export PATH=$PATH:/p/course/cs400/public/scripts/&quot; &gt;&gt; ~/.bashrc
+                  ~~~~~~^</code></pre>
+<p>is a modifier, and it complains because <code>/</code> isn't a valid
+modifier (a csh modifier is usually a single letter). Apparently this is
+not what we mean by "<code>$PATH:/</code>" so, a few ways to make this
+line work in tcsh (<strong>also work in bash/zsh</strong>):</p>
+<ol type="1">
+<li><p>Protect <code>PATH</code> from the colon with braces:</p>
+<pre><code>echo &quot;export PATH=${PATH}:/p/course/cs400/public/scripts/&quot; &gt;&gt; ~/.bashrc</code></pre></li>
+<li><p>Quote <code>$PATH</code> separately from the colon:</p>
+<pre><code>echo &quot;export PATH=$PATH&quot;:/p/course/cs400/public/scripts/ &gt;&gt; ~/.bashrc</code></pre></li>
+</ol>
+<p>Though in all honesty, we should just disable variable interpolation
+altogether with single quotes...</p>
+<pre><code>echo &#39;export PATH=&quot;$PATH&quot;:/p/course/cs400/public/scripts/&#39; &gt;&gt; ~/.bashrc</code></pre>
+<p>P.S. tcsh is probably not going to look at <code>~/.bashrc</code>. So
+unless you <strong><a
+href="https://apps.cs.wisc.edu/cslforms/chsh">change your login
+shell</a> to bash (chances are you want this)</strong>, you probably
+want to consider changing <code>~/.bashrc</code> in that command to
+something like <code>~/.cshrc</code> or <code>~/.tcshrc</code> (review
+the <code>FILES</code> section of <code>man tcsh</code>).</p>
+<p>P.P.S. Also, <code>export</code> doesn't exist in csh/tcsh. You want
+<a
+href="https://man.archlinux.org/man/tcsh.1.en#setenv"><code>setenv</code></a>,
+e.g. <code>setenv PATH ${PATH}:/p/course/cs400/public/scripts/</code>.
+csh is quite different from Bash and other Bourne-like shells! (But then
+again you can switch to Bash since that's what they teach here...)</p>
