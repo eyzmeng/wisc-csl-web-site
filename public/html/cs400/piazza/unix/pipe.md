@@ -32,7 +32,7 @@ P.S. Since you tagged "exam" I will definitely not be in the position to answer 
 
 * Useless Use of Cat (UUOC): This is just something nice to know. (Plus you can learn from the examples!) [[wikipedia](https://en.wikipedia.org/wiki/Cat_%28Unix%29#Useless_use_of_cat)] [[shellcheck SC2002](https://www.shellcheck.net/wiki/SC2002)]
 
-#3 Advanced (For the adventurous [warrior](https://bsky.app/profile/warriorkittys.bsky.social)s)
+#3 Advanced (For the adventurous [warriors](https://bsky.app/profile/warriorkittys.bsky.social))
 
 Those of you who love C/Unix.... this is for you. (I am not aware of the size of the set of people who fit the criteria, but I know (as a matter of fact) its cardinality is strictly greater than 0 (I mean, me -- I love C/Unix, is that not obvious enough? These are resources for *me* even if none of *you* will read them! Ha! >:D))
 
