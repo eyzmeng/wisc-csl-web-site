@@ -178,15 +178,16 @@ href="https://www.youtube.com/watch?v=bKzonnwoR2I">Unix
 <em>resources</em>. :)</p>
 <p>P.S. Since you tagged “exam” I will definitely not be in the position
 to answer this; but that hasn’t stopped my urge to yap for the 100th++
-time! (On second though, I want this to be a wiki people can edit –
+time! (On second thought, I want this to be a wiki people can edit –
 append, modify, or otherwise delete entirely – so… I guess I am posting
 this as an answer. Sorry :)</p>
 <p>(Just don’t tell me you are actually asking about the bitwise OR
 operator in Java… I actually kind of want to collect good stuff about
 pipe and <a
 href="https://manpages.debian.org/bookworm/perl-doc/perlipc.1.en.html">IPC</a>)</p>
-<p>(Also fun fact: If you search for “pipes” in Piazza, 2/3 posts are
-mine doing just that. This will make it a fourth post… :D)</p>
+<p>(Also fun fact: If you search for “pipes” in Piazza, 2/3
+posts/threads are mine just about that. This will make it a fourth post…
+:D)</p>
 <p>#0 The manuals (highly technical, but… useful to remember that they
 exist.)</p>
 <ul>
@@ -198,22 +199,23 @@ page</a>]</li>
 <li>The POSIX Bourne shell <strong>sh</strong>(1): [<a
 href="https://pubs.opengroup.org/onlinepubs/9799919799/utilities/V3_chap02.html#tag_19_09_02">POSIX.1-2024</a>]</li>
 </ul>
-<p>#1 Friendly guides (the ones that are most likely to help – in
-decreasing order of friendliness)</p>
+<p>#1 Friendly guides (the ones that are most likely to help)</p>
 <ul>
 <li><a
 href="https://web.archive.org/web/20080318231951/http://www.cs.wisc.edu/csl/cs1000/node56.html">Advanced
 Topics &gt; Pipe</a>: <strong>from CS1000</strong>, a Unix manual that
 used to live <strong><a
 href="https://web.archive.org/web/20080602103734/http://www.cs.wisc.edu/csl/cs1000/cs1000.html">right
-here on CSL</a></strong>! (Retrieved via Internet Archive as the links
-now redirect to <a href="https://csl.cs.wisc.edu/">CSL docs</a> – I
-know. sadge. i am literally depressed rn csl better bring it back
-/j)</li>
+here on CSL</a></strong> in 2008 (<a
+href="https://www.reddit.com/r/unexpectedfactorial/comments/1g3nrzd/if_i_live_100_years_i_will_see_year_41410%E2%81%B9%C2%B9%C2%B3%E2%81%B0/"><em>not</em>
+factorial</a>)! (Retrieved via Internet Archive as the links now
+redirect to <a href="https://csl.cs.wisc.edu/">CSL docs</a> – I know.
+sadge. i am literally depressed rn csl better bring it back /j)</li>
 <li><a href="https://www.linfo.org/pipe.html">Pipes: A Brief
 Introduction</a>: from the <a
 href="https://www.linfo.org/index.html">Linux Info Project</a>. Includes
-a nice history lesson too.</li>
+a nice history lesson too (the HTML seems a bit messed up but it should
+be okay.)</li>
 <li><a href="https://tldp.org/LDP/abs/html/special-chars.html">Special
 characters</a> (search downward for “UNIX pipe”; unfortunately I can’t
 make a direct link there): you would be very delighted to hear about <a
@@ -262,8 +264,8 @@ Practices</a>: I was today years old when I learned that a “<a
 href="https://punkx.org/unix-pipe-game/">UNIX Pipe Card Game</a>”
 exists. O_O (And <a
 href="https://news.ycombinator.com/item?id=41048894">oh</a>, <a
-href="https://punkx.org/4917/">oh man</a>, it gets so crazier… (And I
-thought <em>Computer Engineering for Babies</em> was crazy enough,
+href="https://punkx.org/4917/">oh man</a>, it gets so much crazier… (And
+I thought <em>Computer Engineering for Babies</em> was crazy enough,
 wow…)</p></li>
 <li><p>Useless Use of Cat (UUOC): This is just something nice to know.
 (Plus you can learn from the examples!) [<a
@@ -271,7 +273,8 @@ href="https://en.wikipedia.org/wiki/Cat_%28Unix%29#Useless_use_of_cat">wikipedia
 [<a href="https://www.shellcheck.net/wiki/SC2002">shellcheck
 SC2002</a>]</p></li>
 </ul>
-<p>#3 Advanced (For the adventurous warriors)</p>
+<p>#3 Advanced (For the adventurous <a
+href="https://bsky.app/profile/warriorkittys.bsky.social">warriors</a>)</p>
 <p>Those of you who love C/Unix…. this is for you. (I am not aware of
 the size of the set of people who fit the criteria, but I know (as a
 matter of fact) its cardinality is strictly greater than 0 (I mean, me –
@@ -303,9 +306,10 @@ href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.c
 approach to pipelines</a>, rather than the text/bytestream/file-based
 interface in Unix. I don’t want to give you my opinion or tell you what
 to think; but there are some good arguments for and against this modern
-re-thinking of shell pipelines both in the blog comments and in HN. (If
-you want to dig an even deeper hole than I did, I heard that the
-designer of Powershell wrote this thing called <a
+re-thinking of shell pipelines both in the blog comments and in HN; and
+in doing so we are putting Unix pipelines in a bigger context… critical
+thinking! (If you want to dig an even deeper hole than I did, I heard
+that the designer of Powershell wrote this thing called <a
 href="https://www.jsnover.com/blog/2011/10/01/monad-manifesto/">Monad
 Manifesto</a>…)</p></li>
 <li><p><a
@@ -324,11 +328,12 @@ you will need to specify the man page section for mkfifo because there
 is a synonymous page in section 1 (for the <a
 href="https://man.netbsd.org/mkfifo.1"><strong>mkfifo</strong>(1)</a>
 <em>command</em>). So instead of this: <code>man mkfifo</code>, run
-this: <code>man 2 mkfifo</code>, or this:
-<code>man -S 2 mkfifo</code>.</p></li>
-<li><p>Since nothing is off-limits, I can selfishly direct you to read
-the abomination I assembled with <strong>sort</strong>(1) |
-<strong>head</strong>(1) | <a
+this: <code>man 2 mkfifo</code>, or this: <code>man -S 2 mkfifo</code>.
+(Actually, for some mysterious reason, mkfifo is in section 3 on Debian
+and Arch Linux. so replace 2 with 3 if that doesn’t work…)</p></li>
+<li><p>Since nothing is off-limits in this section (given that I marked
+it as “Advanced”), I can selfishly direct you to read the abomination I
+assembled with <strong>sort</strong>(1) | <strong>head</strong>(1) | <a
 href="https://man.archlinux.org/man/column.1.en.txt"><strong>column</strong>(1)</a>
 | <strong>sed</strong>(1) in <span class="citation"
 data-cites="724_f1">@724_f1</span>. One thing I should add: I wouldn’t
@@ -336,7 +341,7 @@ use <code>cat -n</code> anymore because <a
 href="https://news.ycombinator.com/item?id=22474362"><strong>cat</strong>(1)
 does too many things</a>. But the awk alternative
 <code>awk '{print NR "\t" $0}'</code> Rob Pike and Brian Kernighan
-mention in the essay “<a
+mention in “<a
 href="https://harmful.cat-v.org/cat-v/unix_prog_design.pdf">Program
 Design in the UNIX Environment</a>” isn’t much prettier IMO. So imagine
 my delight when I <a
@@ -347,9 +352,21 @@ href="https://man.freebsd.org/cgi/man.cgi?query=nl&amp;apropos=0&amp;sektion=1&a
 So now I use <code>nl -b a</code> (sometimes I squeeze the flag and
 option, but I’m not sure how portable this form is: <code>nl -ba</code>)
 and never look back. (yippee! ^^)</p></li>
+<li><p>Oh you think I am done? (I kind of wish I am too, it <em>is</em>
+kind of late now…) But I’ve written even <em>more</em> pipelines – this
+time relevant to project 1, where I demonstrated two pipelines that
+basically replicated the whole project: <a
+href="https://mediaspace.wisc.edu/media/CS400+Project+1+DEMO/1_krislbpw?startTime=1133">18:53</a>.
+(Pipelines are pretty cool if you think about it.)</p></li>
 </ul>
 <p>P.S. I am hosting a copy on <a
 href="https://pages.cs.wisc.edu/~emeng/cs400/piazza/unix/pipes.html">my
-CSL page</a>, in case you want something nicer to look at.</p>
+CSL page</a>, in case you want something nicer to look at. (Idk about
+CS400, but my write-ups are <a
+href="https://pages.cs.wisc.edu/~emeng/cs400/piazza/">Creative
+Commons</a>; so it is open and you are free to share outside of Piazza
+(as is most of the resources I linked in this wiki-ish post).) If you
+make edits, I will add it to the page if you email me and I think it’s
+good. You will be attributed unless you want to remain anonymous.</p>
 </body>
 </html>
