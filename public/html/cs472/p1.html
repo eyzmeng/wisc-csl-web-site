@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>CS472-p1</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<!-- vim: set et sts=4 sw=4: -->
+<h1 id="project-1">Project 1</h1>
+<pre><code>                                   February 2026   
+DONE? DATE    WHAT?            Su Mo Tu We Th Fr Sa
+ [X]  Feb 04  Kickoff           1  2  3  4  5  6  7
+ [ ]  Feb 11  Proposal          8  9 10 11 12 13 14
+                               15 16 17 18 19 20 21
+ [ ]  Feb 25  Draft Website    22 23 24 25 26 27 28
+
+                                    March 2026
+                               Su Mo Tu We Th Fr Sa
+                                1  2  3  4  5  6  7
+ [ ]  Mar 18  Final Website     8  9 10 11 12 13 14
+ [ ]  Mar 18  Presentation     15 16 17 18 19 20 21
+ [ ]  Mar 25  Peer Reflection  22 23 24 25 26 27 28</code></pre>
+<p>Submission portal (Canvas):</p>
+<ul>
+<li><a
+href="https://canvas.wisc.edu/courses/498542/assignments/2962382?module_item_id=9325309">CMS
+Project Proposal</a> (Due Feb 11 by 11:59pm)</li>
+<li><a
+href="https://canvas.wisc.edu/courses/498542/assignments/2962378?module_item_id=9325318">CMS
+Project Draft Website</a> (Due Feb 25 by 11:59pm)</li>
+<li><a
+href="https://canvas.wisc.edu/courses/498542/assignments/2962381?module_item_id=9325354">CMS
+Project Presentation</a> (Due Mar 18 by 11:59pm)</li>
+<li><a
+href="https://canvas.wisc.edu/courses/498542/assignments/2962379?module_item_id=9325353">CMS
+Project Final Website</a> (Due Mar 18 by 11:59pm)</li>
+<li><a
+href="https://canvas.wisc.edu/courses/498542/assignments/2962380?module_item_id=9325359">CMS
+Project Peer Reflections</a> (Due Mar 25 by 11:59pm)</li>
+</ul>
+<p>Quick links:</p>
+<ul>
+<li><a
+href="https://canvas.wisc.edu/courses/498542/files/50828980?wrap=1">Group
+Project Descriptions.pdf</a></li>
+<li><a
+href="https://docs.google.com/document/d/1MtPEg9PSx9ElyB-72vAwlK6-3t418oeh-TYV2f6nav0/edit?usp=sharing">CMS
+Project Proposal [Google Docs]</a></li>
+<li><a
+href="https://docs.google.com/document/d/10Qg19ImZwR-uIe6KKsXxJNmdSVFETG3cBKbkeQYgKkY/edit?tab=t.0">CMS
+Project Final Report [Google Docs]</a></li>
+</ul>
+<h1 id="about-this-page">About this page</h1>
+<p>This page pertains to the <a
+href="https://canvas.wisc.edu/courses/498542">CS 472 course, Spring
+2026</a>. Having a text file like this helps me focus. I also like text
+files because graphical stuff eats up my RAM and I don’t like it.</p>
+<p>The source is on GitHub Gist, which has decent Markdown rendering and
+makes version history transparent.</p>
+<ul>
+<li><a
+href="https://gist.github.com/eyzmeng/2fb7a61f9d939c7c6ad3649e2b194e83"
+class="uri">https://gist.github.com/eyzmeng/2fb7a61f9d939c7c6ad3649e2b194e83</a></li>
+</ul>
+<p>For those of you who use an old-school browser, I also plan to mirror
+this in several locations. I will note below if I have set up a workflow
+that automatically deploys my changes.</p>
+<ul>
+<li><a href="https://pages.cs.wisc.edu/~emeng/cs472/p1.html"
+class="uri">https://pages.cs.wisc.edu/~emeng/cs472/p1.html</a> [not up
+yet!]</li>
+<li><a href="https://www.endfindme.com/cs472/p1"
+class="uri">https://www.endfindme.com/cs472/p1</a> [not up yet!]</li>
+</ul>
+<p>You cannot edit this page, but you can nonetheless let me know
+corrections, suggestions, etc. at any of the contacts listed here.</p>
+<p><a href="https://www.endfindme.com/discord"
+class="uri">https://www.endfindme.com/discord</a></p>
+<p>Also, I think <a href="https://thewebsiteisdown.com/">The Website is
+Down</a> is pretty funny. If you are thinking about becoming a
+sysadmin/webmaster, I recommend you check it out. (Don’t play it during
+a lecture though.)</p>
+</body>
+</html>
