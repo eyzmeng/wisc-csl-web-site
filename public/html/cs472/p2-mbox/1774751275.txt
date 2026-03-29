@@ -1,0 +1,44 @@
+From ethan@rapidcow.org  Sat Mar 28 21:59:55 2026
+Date: Sat, 28 Mar 2026 21:27:55 -0500
+Message-ID: <1774751275.intra.4dA8dB0dF117d@e.mail.rdkw.org>
+In-Reply-To:
+ <BY5PR06MB67056FA9D703DE143232FC2B9E57A@BY5PR06MB6705.namprd06.prod.outlook.com>
+References:
+ <BY5PR06MB67056FA9D703DE143232FC2B9E57A@BY5PR06MB6705.namprd06.prod.outlook.com>
+Thread-Index: AQHcvhGBNp21LlroWEyeBbVmllG2sABEhQ1P
+Thread-Topic: CS/LIS472 Group Formed!
+From: Ethan Meng <ethan@rapidcow.org>
+To: undisclosed-recipients:;
+Subject: Re: CS/LIS472 Group Formed!
+Reply-To: meng69@wisc.edu
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+
+[QUOTE OMITTED]
+
+I'm the said Ethan.  I purposefully did not reunite with
+my previous group, which is how I ended up here. :)
+
+I made a copy of the project proposal Google Docs here:
+
+<https://docs.google.com/document/d/1ExkqyRe6OdswNeY-a5XPz-Uqi9TMPcFosoVj-YE92YI/edit?usp=sharing>
+
+Subsequent info (mostly for my own record) is published here:
+
+<https://pages.cs.wisc.edu/~emeng/cs472/p2.html>
+<https://gist.github.com/472ethan/008067898b820b3cf8b628afa86bdc1d>
+
+I don't know when the professor will create the repository
+but when I feel like it (probably not before the break ends),
+I'll update it here (please point "git clone" at it and not
+your web browser; there is no Web page there):
+
+<https://git.rapidcow.org/~ethan/ics/uwisc/cs472/p2-site.git>
+
+If you want Git push access send me your public SSH key
+and I can append it to my ~/.ssh/authorized_keys file.
+(If you can let me know your GitHub username, I can retrieve
+the same from https://github.com/<yourusername>.keys as well.)
+
+Thanks.  I will see you after the break.
+
