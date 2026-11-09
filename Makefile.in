@@ -1,5 +1,11 @@
+critter.txt \
+cs300/index.html \
 cs300/pair/index.html \
 cs300/pair/feed.html \
 cs300/pair/feed.xml \
 	: render
-	cd -- ${A:Q} && ${^X:Q} render -B ${B:Q} -- ${a:Q}/${.TARGET:Q} ${B:Q}/${b:Q}/${.IMPSRC:Q}
+	cd -- ${A:Q} && ${^X:Q} render -B ${B:Q} -- ${a:Q}/${.IMPSRC:Q} ${B:Q}/${b:Q}/${.TARGET:Q}
+
+cs300/style.css \
+	:
+	cd -- ${A:Q} && cp -f -- ${a:Q}/${.IMPSRC:Q} ${B:Q}/${b:Q}/${.TARGET:Q}

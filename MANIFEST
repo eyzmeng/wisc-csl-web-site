@@ -1,4 +1,7 @@
 MAKE csl-web
+	NEED critter.txt
+	NEED cs300/index.html
+	NEED cs300/style.css
 	NEED cs300/pair/index.html
 	NEED cs300/pair/feed.html
 	NEED cs300/pair/feed.xml

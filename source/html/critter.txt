@@ -1,0 +1,45 @@
+[%
+ # HAVE: ${a}/critter.txt
+-%]
+Somebody says i should post it.... well here he IS!
+
+Also gonna distribute this file to a few locations...
+
+https://gist.github.com/rapidcow/9a037ccf1aa111a9bb457677abef5c63
+[% locate('//critter.txt') %]
+https://www.endfindme.com/critter.txt
+
+
+
+#=======================================================================#
+#                                                                       #
+#   .   . .  .    _.------._     . . . . .                              #
+#    . . . .   .´            `-.    . . . .                             #
+#  .  . . .   /                 '\   . . .                              #
+# .  . . .   |  ____              . . . . .                             #
+#   .   . .  /.´  @28\    ____    |  .   .            HELLO             #
+#  . . . .  |:    @##T| .´ @#%*.  | .  .  .        ROOMMATE !!!         #
+#     . .   ||   @%2Bh/ |  @i$2|  .  . .  .                             #
+#  ' . .   -´ '.&IE@l,  \ #AWs!/  ;  .                                  #
+#   .   .  \             `*@$*'  /  .  .       i don't really           #
+#  . . .    `.     __.         .:`.  .    .     know you much, but      #
+#    .   . .  `'._           ,:::; \    '        have this nice         #
+#   .  .  .       `;;.___...::::'   `\     <<==   critter i guess.      #
+#  .  .  .   ,    /':;;;;;;:;:'       `  .                              #
+#      .   .  .   ;   ,:   ´           '       i drew him  with my [1]  #
+#   ' .  .  .  .  |  ;/    |            \     keyboard, and i hope you  #
+#    .       .    ;  |     |\/     _.-   \   like him as much as i do.  #
+#        '        ,  ;     | :    (       `                             #
+#    -----------  !  |     : '_,--'       )    -----------------------  #
+#      --------- (   /    /  ;           /        --------------------- #
+#  --------------`-·(___; -- \_._____.-´         ----------  Ethan [2]  #
+#  ----------------------------------------  ----------------------     #
+      If you liked the critter, say hi to me and tell me about it!
+      If you didn't like the critter... also say hi to me i guess?
+      My email is <meng69@wisc.edu> for UW (i know, the number =.=)
+
+  [1] by tracing this lil guy i drew normally of course.  you don't want
+      to know the abomination i created without tracing....
+
+  [2] i'm chinese so this isn't really my legal name.  for that it'd
+      be yizheng but playing by the laws is kind of not my thing now (:
