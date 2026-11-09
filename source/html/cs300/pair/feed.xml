@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 [%
  # HAVE: ${a}/cs300/pair/feed.xml
+ #
+-%]
+[%
+  SET feed_html = locate('//./feed.html');
+  SET feed_html_str = feed_html | xml;
 -%]
 <!-- This is an RSS feed for CS300 pardners :)          -->
 <!-- It is completely hand-typed, and includes comments -->
@@ -13,7 +18,7 @@
     <!-- Every channel is required to have a title, -->
     <!-- a link, and a description. -->
     <title>Ethan’s Partner Feed</title>
-    <link>[% locate('//./feed.html') %]</link>
+    <link>[% feed_html_str %]</link>
     <description>Feed for updates about my CS300
     pair programming partner search</description>
     <!-- Documentation for RSS. -->
@@ -43,8 +48,8 @@
       <title>Hello people of CS300!</title>
       <author>meng69@wisc.edu (Ethan Meng)</author>
       <pubDate>Tue, 22 Oct 2024 12:40:47 -0500</pubDate>
-      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729618847</link>
-      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729618847</guid>
+      <link>[% feed_html_str %]#1729618847</link>
+      <guid>[% feed_html_str %]#1729618847</guid>
       <description><![CDATA[
         <P>Welcome! Thank you for tuning into my channel I set up in a rush.
         I am making a partner search page, which is probably what led you to
@@ -81,8 +86,8 @@
       <title>Piazza posted</title>
       <author>meng69@wisc.edu (Ethan Meng)</author>
       <pubDate>Thu, 24 Oct 2024 00:02:18 -0500</pubDate>
-      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729746138</link>
-      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729746138</guid>
+      <link>[% feed_html_str %]#1729746138</link>
+      <guid>[% feed_html_str %]#1729746138</guid>
       <description><![CDATA[
         <P>Huff, tuff... the hard work was done. PHEW didn't know
         it was that hard, I thought I had the time to write an
@@ -105,8 +110,8 @@
       <title>33%</title>
       <author>meng69@wisc.edu (Ethan Meng)</author>
       <pubDate>Thu, 24 Oct 2024 12:27:59 -0500</pubDate>
-      <link>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729790879</link>
-      <guid>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html#1729790879</guid>
+      <link>[% feed_html_str %]#1729790879</link>
+      <guid>[% feed_html_str %]#1729790879</guid>
       <description><![CDATA[
         <P>I'm back from the exam. Getting the assignment due today done
         will be one of my top two priorities for the rest of the day.
