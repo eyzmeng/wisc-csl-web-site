@@ -1,0 +1,5 @@
+#!/bin/sh
+set -ex
+siteconf -if \
+	-Da=source/html -Db=public/html -P web \
+	-Osite_url=https://pages.cs.wisc.edu/~emeng/

@@ -1,0 +1,4 @@
+MAKE csl-web
+	NEED cs300/pair/index.html
+	NEED cs300/pair/feed.html
+	NEED cs300/pair/feed.xml

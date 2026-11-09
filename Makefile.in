@@ -1,0 +1,5 @@
+cs300/pair/index.html \
+cs300/pair/feed.html \
+cs300/pair/feed.xml \
+	: render
+	cd -- ${A:Q} && ${^X:Q} render -B ${B:Q} -- ${a:Q}/${.TARGET:Q} ${B:Q}/${b:Q}/${.IMPSRC:Q}

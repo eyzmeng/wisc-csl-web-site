@@ -10,7 +10,7 @@
     <!-- Every channel is required to have a title, -->
     <!-- a link, and a description. -->
     <title>Ethan’s Partner Feed</title>
-    <link>https://pages.cs.wisc.edu/~emeng/cs300/pair.html</link>
+    <link>https://pages.cs.wisc.edu/~emeng/cs300/pair/feed.html</link>
     <description>Feed for updates about my CS300
     pair programming partner search</description>
     <!-- Documentation for RSS. -->
